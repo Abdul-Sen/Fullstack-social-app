@@ -5,22 +5,25 @@ require('dotenv').config();
 
 const Schema = mongoose.Schema;
 
-// define the user schema
+// define the user schema that is related to this service
 const userSchema = new Schema({
     "userName": {
         type: String,
         required: true,
         unique: true
     },
-    "password": String,
-    "email": {
+    "password": {
         type: String,
         required: true,
-        unique: true
     },
     "lastActiveAt": {
         type: Date,
         default: Date.now
+    },
+    "email": {
+        type: String,
+        required: true,
+        unique: true
     }
 }, { timestamps: true });
 
@@ -69,32 +72,12 @@ module.exports.getAllUsers = async function () {
  */
 module.exports.createNewUser = async function(userData) {
 
-    /**
-     * STEPS:
-     * 1 - Validate data
-     * 2 - hash bcrypt
-     * 3 - Store in DB
-     */
+         let salt = await bcrypt.genSalt(12);
 
-     // TODO TODAY
+         let hash = await bcrypt.hash(userData.password,salt);
 
-     
+         userData.password = hash;
 
-// let guestUser = new UserCollection({
-//     userName: "GuestUser",
-//     password: "Guest#!@123",
-//     email: "guestEmail@domain.com",
-//     lastActiveAt: "2020-01-01",
-// });
-
-// guestUser.save((err)=>{
-//     if(err) {
-//         console.log("There was an error saving the GusetUser company");
-//       } else {
-//         console.log(`The guestUser company was saved to the ${process.env.DB} collection`)
-//       }
-//         // exit the program after saving
-//         process.exit();
-// });
-
+        let result = await UserCollection.create(userData);
+        return result;
 }

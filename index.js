@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const userAuthService = require('./userAuthService');
+const { check, validationResult, sanitizeBody } = require('express-validator');
 
 
 const app = express();
@@ -13,14 +14,42 @@ app.use(bodyParser.json({ type: 'application/json' }))
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
 
+
 // An api endpoint for registering new users
-app.post('/api/register', (req, res) => {
-	console.log(req.body);
+app.post('/api/register', [
+	check('userName').isLength({min: 6}).isAlphanumeric(),
+	check('password').isLength({min: 5 }),
+	check('email').isEmail().normalizeEmail(),
+] , (req, res) => {
 
-	// TODO TODAY
+	const errors = validationResult(req);
+	
+	if (!errors.isEmpty()) {
+		console.log("validation failed");
+		console.log(errors.array());
+		return res.status(422).json({ errors: errors.array() });
+	  }
+	
+	userAuthService.createNewUser(req.body).then((functionResponse)=>{
 
-	res.send("data recieved");
-})
+		console.log(functionResponse);
+
+		res.send("user created");	
+
+	}).catch((err)=>{
+
+		console.log(err.message);
+
+		if(err.code === 11000)
+		{
+			res.send("username or email already exists");
+		}
+
+		res.send("failed to create new user");
+		
+	})
+	
+});
 
 // An api endpoint that returns a short list of items
 app.get('/api/getList', (req, res) => {
@@ -60,8 +89,3 @@ function onHttpStart(){
 	})();
 	
 }
-
-// userAuthService.connectToUserDB().catch((err) => { console.log(err) }).then(userAuthService.getUsers).then((data) => {
-// 	console.log("HELLO");
-// 	console.log(data);
-// }).catch((err) => { console.log(err) });
