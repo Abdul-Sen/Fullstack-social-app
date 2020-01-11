@@ -1,6 +1,7 @@
 // require mongoose and setup the Schema
 const mongoose = require("mongoose");
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const Schema = mongoose.Schema;
@@ -80,4 +81,45 @@ module.exports.createNewUser = async function(userData) {
 
         let result = await UserCollection.create(userData);
         return result;
+}
+
+/**
+ * Validates user credentials against MongoDB
+ * @param userCred { username: required, password: required }
+ * @returns a JWT token that user can use to access restricted routes for a limited time
+ */
+module.exports.loginUser = async function(userCred) {
+    
+    let dbUser = await UserCollection.findOne({ userName: userCred.userName }).exec();
+
+    let matchingPassword = await bcrypt.compare(userCred.password,dbUser.password);
+
+    console.log(`password matching? ${matchingPassword}`);
+    if(matchingPassword){
+
+       let token =  jwt.sign(userCred,process.env.PRIVATE_KEY,{
+           expiresIn: "30min"
+       });
+       return token;       
+    }
+    return -1;
+}
+
+/**
+ * Verifies a token against private key
+ * @param token a JWT token
+ */
+module.exports.verifyToken = async function(token){
+
+    // Wrapping it in promise to be consistant with the API
+    return new Promise((resolve,reject)=>{
+        jwt.verify(token,process.env.PRIVATE_KEY,(validationError, authData)=>{
+            if(validationError)
+            {
+                console.log(validationError);
+                reject("failed to verify");
+            }
+            resolve("verified");
+        })
+    })
 }

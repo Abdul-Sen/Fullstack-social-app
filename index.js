@@ -15,6 +15,76 @@ app.use(bodyParser.json({ type: 'application/json' }))
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 
+// middleware function to authenticate token from a request header. Request should be
+// in following form: Authorization: Bearer <access_token>
+function verifyToken(req,res,next)
+{	
+	// grab token from header
+	const bearerHeader = req.headers['authorization'];
+	
+	// check if bearer is undefind
+	if(typeof bearerHeader !== 'undefined')
+	{
+		const tokenArray = bearerHeader.split(' ');
+		const token = tokenArray[1];
+
+		userAuthService.verifyToken(token).then((data)=>{
+			
+			next();
+
+		}).catch((err)=>{
+
+			console.log(err);
+
+			res.status(403).json({
+				error: "Token authentication failed"
+			});
+
+		})
+	}
+	else{
+
+		//Forbidden
+		res.sendStatus(403).json({
+			message: "Need a token to access"
+		});
+	}
+
+	//send token to verify
+}
+
+
+// logins user and sends JWT token
+app.post('/api/login',[
+	check('userName').isLength({min: 6}).isAlphanumeric()
+], (req,res)=>{
+
+	errors = validationResult(req);
+	
+	if (!errors.isEmpty()) {
+		console.log("validation failed");
+		console.log(errors.array());
+		return res.status(422).json({ errors: errors.array() });
+	  }
+
+	userAuthService.loginUser(req.body).then((data)=>{
+
+		res.json({
+			token: data
+		});
+
+	}).catch((err)=>{
+
+		console.log(err);
+		res.send("failed to login user");
+	})
+
+});
+
+
+
+
+
 // An api endpoint for registering new users
 app.post('/api/register', [
 	check('userName').isLength({min: 6}).isAlphanumeric(),
@@ -52,9 +122,9 @@ app.post('/api/register', [
 });
 
 // An api endpoint that returns a short list of items
-app.get('/api/getList', (req, res) => {
+app.get('/api/getList', verifyToken, (req, res) => {
 	var list = ["item1", "item2", "item3"];
-	res.json(list);
+	res.status(200).json(list);
 	console.log('Sent list of items');
 });
 
