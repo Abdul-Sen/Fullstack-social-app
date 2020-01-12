@@ -1,25 +1,24 @@
-import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import './App.css';
+import React from 'react';
+import {Switch, Route} from 'react-router-dom';
 import Home from './pages/Home';
-import List from './pages/List';
+import Header from './components/header/header';
+import Footer from './components/footer/footer';
+import Login from './components/login/login';
+import Register from './components/register/register';
 
-class App extends Component {
-  render() {
-    const App = () => (
-      <div>
-        <Switch>
-          <Route exact path='/' component={Home}/>
-          <Route path='/list' component={List}/>
-        </Switch>
-      </div>
-    )
-    return (
+function App(props){
+  return (
+    <div>
+      <Header></Header>
       <Switch>
-        <App/>
+        <Route exact path='/' component={Home} />
+        <Route path='/login' component={Login}/>
+        <Route path='/register' component={Register}/>
       </Switch>
-    );
-  }
+      <Footer></Footer>
+    </div>
+  );
+
 }
 
 export default App;
