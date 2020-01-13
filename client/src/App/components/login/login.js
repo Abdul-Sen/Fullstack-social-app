@@ -2,7 +2,7 @@ import React from 'react';
 
 function Login(props)
 {
-    return (<p>Login</p>)
+    return (<p>Login       {React.version}        </p>)
 }
 
 export default Login;
