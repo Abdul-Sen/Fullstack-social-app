@@ -1,20 +1,14 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Fragment } from 'react';
+import List from './List';
 
-
-class Home extends Component {
-  render() {
-    return (
-    <div className="App">
-      <h1>Project Home</h1>
-      {/* Link to List.js */}
-      <Link to={'./list'}>
-        <button variant="raised">
-            My List
-        </button>
-      </Link>
-    </div>
-    );
-  }
+function Home(props)
+{
+  return (
+    <Fragment>
+      <p>Home rendering a List Component</p>
+      <List></List>
+    </Fragment>
+  )
 }
+
 export default Home;
