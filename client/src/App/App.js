@@ -1,10 +1,12 @@
 import React from 'react';
 import {Switch, Route} from 'react-router-dom';
-import Home from './pages/Home';
+
 import Header from './components/header/header';
+import Home from './pages/Home';
+import Login from './pages/login';
+import Register from './pages/register';
 import Footer from './components/footer/footer';
-import Login from './components/login/login';
-import Register from './components/register/register';
+
 
 function App(props){
   return (

@@ -1,17 +1,19 @@
 import React, { Fragment } from 'react';
 import {Link} from 'react-router-dom';
+// import * as ROUTES from '../../routes/routes';
+import * as ROUTES from '../../routes/route';
 
 function Header(props)
 {
     return (
         <Fragment>
-           <Link to={'/'}>
+           <Link to={ROUTES.HOME}>
                 <button>Home</button>
             </Link>
-            <Link to={'/login'}>
+            <Link to={ROUTES.LOGIN}>
                 <button>Login</button>
             </Link>
-            <Link to={'/register'}>
+            <Link to={ROUTES.REGISTER}>
                 <button>Register</button>
             </Link>
         </Fragment>
