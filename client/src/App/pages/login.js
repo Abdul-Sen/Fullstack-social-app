@@ -4,11 +4,17 @@ import { CssBaseline, Grid, Paper } from '@material-ui/core';
 import FormComponent from '../components/formComponent/formComponent'
 const useStyles = makeStyles(theme =>({
     root : {
-        height: "100vh",
-        background: "#6190E8",
-        background: "linear-gradient(220deg, #A7BFE8, #5a8ae6)"
+        [theme.breakpoints.up('md')]:{
+            height: "100vh",
+            background: "#6190E8",
+            background: "linear-gradient(220deg, #A7BFE8, #5a8ae6)"    
+        }
         
     },
+    card: {
+        marginTop: "15px"
+    }
+    ,
     image: {
         backgroundImage: 'url(https://source.unsplash.com/random)',
         backgroundRepeat: 'no-repeat',
@@ -21,8 +27,11 @@ const useStyles = makeStyles(theme =>({
         height: "100%",
     },
     paperContainer: {
-        height: "80%",
-        marginTop: "6%"
+        [theme.breakpoints.up('md')]:
+        {
+            height: "80%",
+            marginTop: "6%"    
+        }
     }
 }))
 
@@ -38,7 +47,7 @@ function Login(props)
                     <Grid  container  direction="row"  justify="center"  alignItems="stretch"  className={cssStyle.paperContainer} component={Paper} elevation={12} >
 
                         <Grid item md={6} sm={6} xs={false} className={cssStyle.image} ></Grid>
-                        <Grid item md={6} sm={6} xs={12}>
+                        <Grid item md={6} sm={12} xs={12} className={cssStyle.card}>
                             <FormComponent/>
                         </Grid>
                     </Grid>
@@ -48,22 +57,3 @@ function Login(props)
     )
 }
 export default Login;
-// function Login(props){
-//     const cssStyle = useStyles();
-//     return (
-//         <Grid Container className={cssStyle.root} >
-//             {/* <CssBaseline /> */}
-//             <Grid item md={7}>
-//                 <Grid Container spacing={10}>
-//                 <Grid item xs={false} sm={4} md={7} className={cssStyle.image} >test</Grid>
-//                     <Grid item md={6}>
-//                         <p>hello111</p>
-//                     </Grid>
-//                 </Grid>
-//             </Grid>
-
-//         </Grid>
-//     );
-// }
-
-// export default Login;
