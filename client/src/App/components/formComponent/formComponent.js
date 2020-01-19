@@ -6,12 +6,21 @@ const useStyles = makeStyles(theme => ({
         '& .MuiGrid-item' :{
             textAlign: "center"
         }
+    },
+
+    submitButton: {
+        background: '#ec008c',
+        background: 'linear-gradient(45deg, #fc6767, #ec008c)',
+        padding: "10px",
+        width: "250px",
+        height:"50px"
     }
 }));
   
 
 function FormComponent(props) {
 
+    const cssStyle = useStyles();
 
     const handleChange = (event) => {
         console.log(`stuff changed, this is what changed it:`);
@@ -54,7 +63,7 @@ function FormComponent(props) {
                 </TextField>
             </Grid>
             <Grid item md={12} sm={12} xs={12}>
-                <Button onClick={handleSubmit}>Submit</Button>
+                <Button onClick={handleSubmit} className={cssStyle.submitButton}>Submit</Button>
             </Grid>
             <Grid item md={12} sm={12} xs={12}>
                 <AltLogin />
