@@ -4,15 +4,15 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App/App';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { amber, red } from '@material-ui/core/colors';
+import { amber, red, lightBlue, purple } from '@material-ui/core/colors';
 import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
 
 // ? THEME STUFF
 const rootTheme = createMuiTheme({
   palette: {
-    primary: amber,
-    secondary: red
+    primary: lightBlue,
+    secondary: purple
   },
 });
 // ? THEME STUFF ENDS
