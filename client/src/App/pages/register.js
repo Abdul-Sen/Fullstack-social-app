@@ -5,7 +5,8 @@ import RegisterUser from '../components/registerUser/registerUser';
 const useStyles = makeStyles(theme => ({
     root: {
         [theme.breakpoints.up('md')]: {
-            height: "100vh",
+            minHeight: "100vh",
+            padding: "50px",
             backgroundImage: 'url(https://source.unsplash.com/random)',
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
