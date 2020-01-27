@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App/App';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { amber, red, lightBlue, purple } from '@material-ui/core/colors';
+import { lightBlue, purple } from '@material-ui/core/colors';
 import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
 
