@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Grid, Typography, TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { useHistory } from 'react-router-dom';
+
 const useStyles = makeStyles(theme => ({
     altLogin:{
         '& .MuiGrid-item' :{
@@ -16,32 +18,58 @@ const useStyles = makeStyles(theme => ({
         height:"50px"
     }
 }));
-  
+
+const INITIAL_STATE = { firstName: "", password: "" }
 
 function FormComponent(props) {
+    const history = useHistory();
 
+    const [userInfo, setUserInfo] = useState(INITIAL_STATE);
+    
     const cssStyle = useStyles();
 
     const handleChange = (event) => {
-        console.log(`stuff changed, this is what changed it:`);
-        console.log(event.target);
+        const {name, value} = event.target;
+
+        setUserInfo((currentState)=>({
+            ...currentState,
+            [name]: value
+        }));
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(`form submitted`);
-        console.log(event);
+        console.log(userInfo);
+
+        fetch(process.env.REACT_APP_PUBLIC_URL + "api/login",{
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userInfo)
+        })
+        .then((res)=> res.json())
+        .then((response)=>{
+            localStorage.setItem("token",response.token);
+            if(props.redirect)
+            {
+                history.push(props.redirect);
+            }
+        }).catch((err)=>{
+            console.log("login failed");
+            console.log(err);
+        });
+        
     }
     return (
         <Grid container direction="column" justify="center" alignItems="center" spacing={3}>
-
             <Grid item md={12} sm={12} xs={12}>
                 <Typography component="h1" variant="h5">Sign In</Typography>
             </Grid>
             <Grid item md={12} sm={12} xs={12}>
                 <TextField
                     label="username"
-                    name="username"
+                    name="userName"
                     type="text"
                     variant="outlined"
                     color="primary"

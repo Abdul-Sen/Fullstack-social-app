@@ -51,7 +51,7 @@ function Login(props)
                             <div className={cssStyle.image}></div>
                         </Grid>
                         <Grid item md={6} sm={6} xs={12} className={cssStyle.card}>
-                            <FormComponent/>
+                            <FormComponent redirect="/dashboard"/>
                         </Grid>
                     </Grid>
                 </Grid>
