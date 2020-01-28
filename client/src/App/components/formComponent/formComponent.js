@@ -50,7 +50,7 @@ function FormComponent(props) {
         })
         .then((res)=> res.json())
         .then((response)=>{
-            localStorage.setItem("token",response.token);
+            sessionStorage.setItem("token",response.token)
             if(props.redirect)
             {
                 history.push(props.redirect);

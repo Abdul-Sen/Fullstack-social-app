@@ -9,7 +9,7 @@ import Footer from './components/footer/footer';
 import Dashboard from './pages/dashboard';
 
 function PrivateRoute({ children, ...rest }) {
-  return (<Route {...rest} render={() => (localStorage.getItem("token")) ? (children) : (<Redirect to={{ pathname: "/login" }}/>) } /> );
+  return (<Route {...rest} render={() => (sessionStorage.getItem("token")) ? (children) : (<Redirect to={{ pathname: "/login" }}/>) } /> );
 }
 
 function App(props){
