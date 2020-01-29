@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import {makeStyles } from '@material-ui/core/styles';
 import { CssBaseline, Grid, Paper } from '@material-ui/core';
-import FormComponent from '../components/formComponent/formComponent'
+import LoginUserForm from '../components/shared/loginUserForm/loginUserForm';
 const useStyles = makeStyles(theme =>({
     root : {
         [theme.breakpoints.up('md')]:{
@@ -51,7 +51,7 @@ function Login(props)
                             <div className={cssStyle.image}></div>
                         </Grid>
                         <Grid item md={6} sm={6} xs={12} className={cssStyle.card}>
-                            <FormComponent redirect="/dashboard"/>
+                            <LoginUserForm redirect="/dashboard"/>
                         </Grid>
                     </Grid>
                 </Grid>

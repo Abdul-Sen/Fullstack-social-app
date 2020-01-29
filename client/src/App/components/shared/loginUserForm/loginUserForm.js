@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
 
 const INITIAL_STATE = { firstName: "", password: "" }
 
-function FormComponent(props) {
+function LoginUserForm(props) {
     const history = useHistory();
 
     const [userInfo, setUserInfo] = useState(INITIAL_STATE);
@@ -137,4 +137,4 @@ function AltLogin() {
     )
 }
 
-export default FormComponent;
+export default LoginUserForm;

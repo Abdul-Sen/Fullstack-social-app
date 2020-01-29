@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { CssBaseline, Grid, makeStyles, Card, CardContent, Typography, Box } from '@material-ui/core';
-import RegisterUser from '../components/registerUser/registerUser';
+import RegisterUser from '../components/shared/registerUser/registerUser';
 
 const useStyles = makeStyles(theme => ({
     root: {
