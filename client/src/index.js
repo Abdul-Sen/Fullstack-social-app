@@ -7,6 +7,7 @@ import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { lightBlue, purple } from '@material-ui/core/colors';
 import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
+import globalStore from './App/store/globalStore';
 
 // ? THEME STUFF
 const rootTheme = createMuiTheme({
@@ -17,37 +18,13 @@ const rootTheme = createMuiTheme({
 });
 // ? THEME STUFF ENDS
 
-
-// ? REDUX STUFF STARTS
-function loginReducer(currentState = { loginStatus: false }, actionRequested) {
-  console.log("inside reducer...");
-  console.log(currentState);
-
-  switch (actionRequested.type) {
-    case "UPDATE_STATE":
-      return {
-        ...currentState,
-        loginStatus: actionRequested.payload
-      };
-    default:
-      return currentState;
-  }
-}
-
-const rootReducer = combineReducers({
-  loginReducer
-});
-
-const globalStore = createStore(rootReducer);
-
-
-// ? REDUX STUFF ENDS
+const store = globalStore();
 
 render((
     <BrowserRouter>
 
     <ThemeProvider theme={rootTheme}>
-      <Provider store={globalStore}>
+      <Provider store={store}>
         <App/>
       </Provider>
     </ThemeProvider>
