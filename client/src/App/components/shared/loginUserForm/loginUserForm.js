@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import { Grid, Typography, TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from "react-redux";
+
 
 const useStyles = makeStyles(theme => ({
     altLogin:{
@@ -22,6 +24,17 @@ const useStyles = makeStyles(theme => ({
 const INITIAL_STATE = { firstName: "", password: "" }
 
 function LoginUserForm(props) {
+    const {loginStatus} = useSelector(globalState =>({...globalState.loginReducer}));
+    const dispatch = useDispatch();
+
+    const handleLoginChange = value => {
+        console.log(value);
+        dispatch({
+          type: "UPDATE_STATE",
+          payload: value
+        });
+      };
+
     const history = useHistory();
 
     const [userInfo, setUserInfo] = useState(INITIAL_STATE);
@@ -53,8 +66,10 @@ function LoginUserForm(props) {
             sessionStorage.setItem("token",response.token)
             if(props.redirect)
             {
+                handleLoginChange(true)
                 history.push(props.redirect);
             }
+            
         }).catch((err)=>{
             console.log("login failed");
             console.log(err);

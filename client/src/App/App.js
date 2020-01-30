@@ -23,7 +23,6 @@ function App(props){
         <PrivateRoute path='/dashboard' >
           <Dashboard />
         </PrivateRoute>
-        
       </Switch>
       <Footer></Footer>
     </div>

@@ -19,8 +19,23 @@ const rootTheme = createMuiTheme({
 
 
 // ? REDUX STUFF STARTS
+function loginReducer(currentState = { loginStatus: false }, actionRequested) {
+  console.log("inside reducer...");
+  console.log(currentState);
+
+  switch (actionRequested.type) {
+    case "UPDATE_STATE":
+      return {
+        ...currentState,
+        loginStatus: actionRequested.payload
+      };
+    default:
+      return currentState;
+  }
+}
+
 const rootReducer = combineReducers({
-  //TODO: Add reducers
+  loginReducer
 });
 
 const globalStore = createStore(rootReducer);
