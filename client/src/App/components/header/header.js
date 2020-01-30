@@ -38,7 +38,7 @@ function Header(props) {
                             <img src={process.env.PUBLIC_URL + '/lines.ico'} width="50px" height="50px" />
                         </Link>
                     </Grid>
-                        {(loginStatus === true)? <LoggedIn/>: <LoggedOut/>}
+                        {(loginStatus === true)? <LoggedIn/>: <LoggedOut/>} {/* TODO: cahnge to true */}
                 </Grid>
             </AppBar>
         </Fragment>

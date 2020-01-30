@@ -5,7 +5,6 @@ import './index.css';
 import App from './App/App';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { lightBlue, purple } from '@material-ui/core/colors';
-import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
 import globalStore from './App/store/globalStore';
 
