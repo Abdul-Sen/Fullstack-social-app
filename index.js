@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const userAuthService = require('./userAuthService');
+const mockUsersService = require('./mockUsersService');
 const { check, validationResult, sanitizeBody } = require('express-validator');
 
 
@@ -133,6 +134,19 @@ app.get('/api/getList', (req, res) => {
 	res.status(200).json(list);
 });
 
+app.get('/api/getAllMockUsers', (req,res)=>{
+
+	mockUsersService.getAllUsers().then((data)=>{
+		console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+		data.forEach(element => {
+			console.log(element);
+		});
+	}).catch((err)=>{
+		console.log("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
+		console.log(err);
+	})
+	
+})
 
 
 // Handles any requests that don't match the ones above
