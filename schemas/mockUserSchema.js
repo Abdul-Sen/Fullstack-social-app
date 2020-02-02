@@ -1,9 +1,6 @@
-require('dotenv').config();
 const mongoose = require('mongoose')
-
 const Schema = mongoose.Schema;
 
-//todo: Convert date string to date Date type
 const mockUsersSchema = new Schema({
     "gender": String,
     "name" : {
@@ -52,4 +49,4 @@ const mockUsersSchema = new Schema({
     }
 }, {timestamps: true});
 
-let mockUserCollection = mongoose.model(process.env.DB, mockUserCollection);
+module.exports = mockUsersSchema;

@@ -2,35 +2,10 @@
 const mongoose = require("mongoose");
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const userSchema = require('../schemas/userSchema');
 require('dotenv').config();
 
-const Schema = mongoose.Schema;
-
-// define the user schema that is related to this service
-const userSchema = new Schema({
-    "userName": {
-        type: String,
-        required: true,
-        unique: true
-    },
-    "password": {
-        type: String,
-        required: true,
-    },
-    "lastActiveAt": {
-        type: Date,
-        default: Date.now
-    },
-    "email": {
-        type: String,
-        required: true,
-        unique: true
-    }
-}, { timestamps: true });
-
-let UserCollection = mongoose.model(process.env.DB, userSchema); //env in our current case, itemStore
-
-
+// let UserCollection = mongoose.model(process.env.DB_USERS, userSchema); //env in our current case, itemStore
 
 /**
 * Opens the default mongoose connection.
@@ -41,12 +16,20 @@ let UserCollection = mongoose.model(process.env.DB, userSchema); //env in our cu
 */
 module.exports.connectToUserDB = async function () {
     try {
-        const DB_URL = process.env.DB_ROOT + process.env.DB;
+        const DB_URL = process.env.DB_ROOT + process.env.DB_USERS;
         console.log(`Connecting to ${DB_URL}`);
 
         mongoose.set('useUnifiedTopology', true);
         mongoose.set('useNewUrlParser', true);
-        var db = await mongoose.connect(DB_URL); //returns psudo-promise;
+        
+        var db1 = await mongoose.createConnection(DB_URL);
+          
+        const UserModel = db1.model('users', userSchema);
+        let res = await UserModel.find({}).exec();
+        console.log(res);
+
+        
+        // var db = await mongoose.connect(DB_URL); //returns psudo-promise;
 
         return 0;
     }
@@ -65,7 +48,6 @@ module.exports.connectToUserDB = async function () {
 module.exports.getAllUsers = async function () {
     return await UserCollection.find({}).exec(); // Exec returns promises
 }
-
 
 /**
  * Adds new user to the MongoDB user collection

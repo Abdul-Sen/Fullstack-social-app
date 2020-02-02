@@ -134,13 +134,28 @@ app.get('/api/getList', (req, res) => {
 	res.status(200).json(list);
 });
 
+
+app.get('/api/getAllUsers', (req,res)=>{
+
+	userAuthService.getAllUsers().then((data)=>{
+		console.log("AAAAAAAAAAAAA");
+		console.log(data);
+		res.json(JSON.stringify(data));
+	}).catch((err)=>{
+		console.log("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
+		console.log(err);
+		res.send("failed");
+	})
+	
+})
+
+
 app.get('/api/getAllMockUsers', (req,res)=>{
 
 	mockUsersService.getAllUsers().then((data)=>{
 		console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-		data.forEach(element => {
-			console.log(element);
-		});
+		console.log(data);
+		res.json(JSON.stringify(data));
 	}).catch((err)=>{
 		console.log("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
 		console.log(err);
