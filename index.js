@@ -1,8 +1,8 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const userAuthService = require('./userAuthService');
-const mockUsersService = require('./mockUsersService');
+const userAuthService = require('./services/userAuthService');
+const mockUsersService = require('./services/mockUsersService');
 const { check, validationResult, sanitizeBody } = require('express-validator');
 
 
@@ -138,11 +138,9 @@ app.get('/api/getList', (req, res) => {
 app.get('/api/getAllUsers', (req,res)=>{
 
 	userAuthService.getAllUsers().then((data)=>{
-		console.log("AAAAAAAAAAAAA");
 		console.log(data);
 		res.json(JSON.stringify(data));
 	}).catch((err)=>{
-		console.log("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
 		console.log(err);
 		res.send("failed");
 	})
@@ -153,11 +151,9 @@ app.get('/api/getAllUsers', (req,res)=>{
 app.get('/api/getAllMockUsers', (req,res)=>{
 
 	mockUsersService.getAllUsers().then((data)=>{
-		console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 		console.log(data);
 		res.json(JSON.stringify(data));
 	}).catch((err)=>{
-		console.log("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
 		console.log(err);
 	})
 	
@@ -174,22 +170,4 @@ app.listen(HTTP_PORT,onHttpStart);
 
 function onHttpStart(){
 	console.log("server listening to requests on port " + HTTP_PORT);
-	console.log("Starting DB");
-	(async ()=>{
-		let status = await userAuthService.connectToUserDB();
-		if(status === 0)
-		{
-			console.log("connected to Users database");
-		}
-		else if(status === -1)
-		{
-			console.log("failed to connect to database");
-		}
-		else {
-			console.log("Unexpected response");
-			console.log (status);
-		}
-
-	})();
-	
 }

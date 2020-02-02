@@ -5,41 +5,33 @@ const jwt = require('jsonwebtoken');
 const userSchema = require('../schemas/userSchema');
 require('dotenv').config();
 
-// let UserCollection = mongoose.model(process.env.DB_USERS, userSchema); //env in our current case, itemStore
-
-/**
-* Opens the default mongoose connection.
-* connect to the localhost mongo running on default port 27017
-* @returns status code.
-* @0 - connected successfully
-* @-1 - connection error
-*/
-module.exports.connectToUserDB = async function () {
+//! Single instance run
+var UserCollection = (() => {
     try {
         const DB_URL = process.env.DB_ROOT + process.env.DB_USERS;
         console.log(`Connecting to ${DB_URL}`);
 
         mongoose.set('useUnifiedTopology', true);
         mongoose.set('useNewUrlParser', true);
-        
-        var db1 = await mongoose.createConnection(DB_URL);
+
+        const db = mongoose.createConnection(DB_URL);
+        db.on('error', (err)=>{
+            console.log("db1 error!");
+            console.log(err);
+          });
           
-        const UserModel = db1.model('users', userSchema);
-        let res = await UserModel.find({}).exec();
-        console.log(res);
-
-        
-        // var db = await mongoose.connect(DB_URL); //returns psudo-promise;
-
-        return 0;
+          db.once('open', ()=>{
+            console.log("userAuth success!");
+          });
+          
+         return (db.model(process.env.DB_USERS,userSchema,process.env.DB_USERS));
     }
     catch (err) {
-        console.log("Failed to connect to MongoDB instance");
+        console.log("userAuth Failed to connect to MongoDB instance");
         console.log(err);
         return -1;
     }
-}
-
+})();
 
 /**
 * Get the list of all the users in the DB, dont know why but you can do it.
