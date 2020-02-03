@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 function Browse(props){
 
-    return (<p>browse component</p>)
+    return (<Fragment>
+        <p>browse component</p>
+        <UserProfileGrid/>
+    </Fragment>)
     
 }
 
