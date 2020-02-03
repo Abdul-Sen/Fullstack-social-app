@@ -34,3 +34,19 @@ module.exports.getAllUsers = async function () {
     
     return await MockUserModel.find({}).exec(); // Exec returns promises
 }
+
+
+/**
+* Returns the requested page of documents from collection
+* @param pageNumber 
+        numeric value of the page you requested
+* @returns {object} 
+*        containing query results in `docs` property 
+*        and metadata information that can be used to determine
+*        if more pages exist
+*/
+module.exports.queryPages = async function(pageNumber) {
+   let docsTen = await MockUserModel.paginate({},{page:pageNumber, limit: 10});
+
+   return docsTen;
+}

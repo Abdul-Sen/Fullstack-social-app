@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const userAuthService = require('./services/userAuthService');
 const mockUsersService = require('./services/mockUsersService');
 const { check, validationResult, sanitizeBody } = require('express-validator');
+const {query} = require('express-validator/check')
 
 
 const app = express();
@@ -83,13 +84,27 @@ app.post('/api/login',[
 });
 
 
-
-
+// e.g http://localhost:5000/api/getMockPage/?page=20
+app.get('/api/getMockPage',[
+	query('page').isNumeric().withMessage("only numeric value allowed").isLength({min:1}).withMessage("you need to pass in a page number")	
+],(req,res)=>{
+	let reg = /^\d+$/;
+	if(reg.test(req.query.page)) //! Temporary solution while i figure out why isNumeric is not behaving as expected
+	{
+		mockUsersService.queryPages(req.query.page).then((data)=>{
+			res.json(JSON.stringify(data));
+		}).catch((err)=>{
+			console.log(`error happened`);
+			console.log(err);
+			res.send(`error`);
+		})
+	}
+});
 
 // An api endpoint for registering new users
 app.post('/api/register', [
-	check('userName').isLength({min: 6}).isAlphanumeric(),
-	check('password').isLength({min: 5 }),
+	check('userName').isLength({min: 6}).withMessage("username must be at least 6 characters long").isAlphanumeric().withMessage("only alphanumeric characters allowed for username"),
+	check('password').isLength({min: 5 }).withMessage("password must be minimum of 5 characters long"),
 	check('email').isEmail().normalizeEmail(),
 ] , (req, res) => {
 

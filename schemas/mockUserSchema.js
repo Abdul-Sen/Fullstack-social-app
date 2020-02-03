@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const mongoosePaginate = require('mongoose-paginate');
 const Schema = mongoose.Schema;
 
 const mockUsersSchema = new Schema({
@@ -48,5 +49,7 @@ const mockUsersSchema = new Schema({
         "nat": String
     }
 }, {timestamps: true});
+
+mockUsersSchema.plugin(mongoosePaginate);
 
 module.exports = mockUsersSchema;
