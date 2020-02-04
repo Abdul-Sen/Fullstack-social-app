@@ -6,12 +6,16 @@ function UserProfileCard(props){
     console.log(props);
     return (
         <Fragment>
-            <Box padding='100px' margin='100px'>
-                <pre>{JSON.stringify(props,undefined, 2)}</pre>
-            </Box>
-
+            <Card>
+                
+            </Card>
         </Fragment>
     )
 }
 
 export default UserProfileCard;
+
+            
+// <Box padding='100px' margin='100px'>
+// <pre>{JSON.stringify(props,undefined, 2)}</pre>
+// </Box>

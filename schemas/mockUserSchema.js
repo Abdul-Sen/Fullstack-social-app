@@ -46,7 +46,12 @@ const mockUsersSchema = new Schema({
             "medium": String,
             "thumbnail": String
         },
-        "nat": String
+        "nat": String,
+        "devInfo": {
+            "type": String,
+            "intro": String,
+            "bio": String
+        }
     }
 }, {timestamps: true});
 
