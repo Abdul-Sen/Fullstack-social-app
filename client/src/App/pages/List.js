@@ -30,6 +30,8 @@ function List(props)
       <br></br>
       
       {myList.map((value,index)=>{
+        console.log(`XXXhelloXXX`);
+
         return (<li>{value}</li>)
       })}
 

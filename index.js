@@ -92,7 +92,7 @@ app.get('/api/getMockPage',[
 	if(reg.test(req.query.page)) //! Temporary solution while i figure out why isNumeric is not behaving as expected
 	{
 		mockUsersService.queryPages(req.query.page).then((data)=>{
-			res.json(JSON.stringify(data));
+			res.json(data);
 		}).catch((err)=>{
 			console.log(`error happened`);
 			console.log(err);
