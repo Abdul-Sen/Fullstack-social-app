@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import UserProfileGrid from '../components/shared/userProfileGrid/userProfileGrid';
 import { makeStyles } from '@material-ui/core/styles';
-import { Container, CssBaseline } from '@material-ui/core';
+import { Container, CssBaseline, Box } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     root: {

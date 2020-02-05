@@ -40,7 +40,7 @@ function UserStateProfile(props) {
             loader={<h4>Loading...</h4>}
         >
             {userData.docs.map((value, index) => {
-                return (<UserProfileCard props={value}/>);
+                return (<UserProfileCard userData={value}/>);
             })}
 
         </InfiniteScroll>
