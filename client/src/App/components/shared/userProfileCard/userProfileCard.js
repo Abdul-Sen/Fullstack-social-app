@@ -46,7 +46,8 @@ const useStyles = makeStyles({
 function UserProfileCard(props) {
   const cssStyle = useStyles();
   const formatPhone = phoneNum => {
-    phoneNum = phoneNum.replace(/^0+/g, "");
+    let numberPattern = /\d+/g;
+    phoneNum = phoneNum.match( numberPattern ).join('')
     return phoneNum;
   };
   
