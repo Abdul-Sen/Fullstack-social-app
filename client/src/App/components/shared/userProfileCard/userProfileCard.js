@@ -49,8 +49,7 @@ function UserProfileCard(props) {
     phoneNum = phoneNum.replace(/^0+/g, "");
     return phoneNum;
   };
-
-  console.log(props);
+  
   return (
     <Fragment>
       <Paper elevation={0} className={cssStyle.root}>

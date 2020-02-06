@@ -1,14 +1,28 @@
 import React, { Fragment, useState, useEffect } from 'react';
+import {Grid} from '@material-ui/core';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import UserProfileCard from '../userProfileCard/userProfileCard';
 
+const INITIAL_USERDATA = { docs: [], total: null, limit: 10, page: "0", pages: null };
+
 //{"docs":[],"total":200,"limit":10,"page":"21","pages":20}
 function UserStateProfile(props) {
-    const [userData, setUserData] = useState({ docs: [], total: null, limit: 10, page: "0", pages: null });
+    const [userData, setUserData] = useState(INITIAL_USERDATA);
+    const [userDataArray,setUserDataArray] = useState([]);
+
+    const handleUserDataArray = (newState)=>{
+        setUserDataArray((currentState) => ([
+            ...currentState,
+            ...newState
+        ]));
+    }
 
     useEffect(() => {
-        console.log(`user data changed...`);
-        console.log(userData);
+        if(userData.page == INITIAL_USERDATA.page)
+        {
+            fetchData();
+        }
+        handleUserDataArray(userData.docs);
     }, [userData]);
 
     const fetchData = () => {
@@ -18,7 +32,6 @@ function UserStateProfile(props) {
             })
             .then((res) => {
                 handleUserData(res);
-
             }).catch((err) => {
                 console.log("failed to register user");
                 console.log(err);
@@ -27,21 +40,41 @@ function UserStateProfile(props) {
 
     const handleUserData = (newState) => {
         setUserData((currentState) => ({
-            ...currentState,
+            // ...currentState,
             ...newState
         }));
     }
 
+    const checkHasMore = ()=> {
+       return (Number(userData.page) == (userData.pages - 15))? false: true;
+    }
+
     return (
         <InfiniteScroll
-            dataLength={10}
+            dataLength={userDataArray.length}
+            hasMore={checkHasMore()}
             next={fetchData}
-            hasMore={true}
             loader={<h4>Loading...</h4>}
+            endMessage={
+                <p style={{textAlign: 'center'}}>
+                  <b>Yay! You have seen it all</b>
+                </p>
+              }
         >
-            {userData.docs.map((value, index) => {
-                return (<UserProfileCard userData={value}/>);
-            })}
+            <Grid
+                container
+                direction="row"
+                justify="space-evenly"
+                alignItems="stretch"
+            >
+                {userDataArray.map((value, index) => {
+                    return (
+                        <Grid item md={6} sm={12} xs={12} >
+                            <UserProfileCard userData={value} />
+                        </Grid>
+                    );
+                })}
+            </Grid>
 
         </InfiniteScroll>
     )
