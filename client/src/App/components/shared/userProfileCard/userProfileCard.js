@@ -1,7 +1,8 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper, Grid, Typography, Box } from "@material-ui/core";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
+import UserProfileDialog from '../userProfileDialog/userProfileDialog';
 
 const useStyles = makeStyles({
   root: {
@@ -50,10 +51,24 @@ function UserProfileCard(props) {
     phoneNum = phoneNum.match( numberPattern ).join('')
     return phoneNum;
   };
+
+  const [showDialog, setShowDialog] = useState(false);
+  const showDialogEvent = () => {
+    setShowDialog(currentState => !currentState);
+  };
   
   return (
     <Fragment>
-      <Paper elevation={0} className={cssStyle.root}>
+            {showDialog == true ? (
+        <UserProfileDialog
+          userData={props.userData}
+          dialogStatus={showDialog}
+        />
+      ) : (
+        console.log("showDialog was... " + showDialog)
+      )}
+
+      <Paper elevation={0} className={cssStyle.root} onClick={showDialogEvent}>
         <div id="user">
           <img src={props.userData.picture.large} />
         </div>
