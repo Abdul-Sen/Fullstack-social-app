@@ -53,6 +53,7 @@ function LoginUserForm(props) {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(userInfo);
+        console.log("api/login");
 
         fetch(process.env.REACT_APP_PUBLIC_URL + "api/login",{
             method: "POST",

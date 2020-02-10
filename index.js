@@ -5,9 +5,13 @@ const userAuthService = require('./services/userAuthService');
 const mockUsersService = require('./services/mockUsersService');
 const { check, validationResult, sanitizeBody } = require('express-validator');
 const {query} = require('express-validator/check')
+const cors = require('cors')
 
 
 const app = express();
+// ! Middleware setups
+// Allow cors
+app.use(cors())
 
 // JSON parser middleware to interpret JSON body requests
 app.use(bodyParser.json({ type: 'application/json' }))
