@@ -9,6 +9,7 @@ const useStyles = makeStyles(theme=>({
         borderRadius: 3,
         boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
         color: 'white',
+        fontSize: 21,
         height: 60,
         padding: '0 30px',
         marginRight: '10px'
@@ -20,7 +21,7 @@ function LandingIntro(props) {
     const cssStyles = useStyles();
     return (
         <Fragment>
-            <Typography variant="h2">
+            <Typography variant="h2" gutterBottom={true}>
                 <Box>
                     For developers, by developers
                 </Box>
@@ -38,7 +39,7 @@ function LandingIntro(props) {
             </Typography>
             <Box component="span" m={1}>
             <Button className={cssStyles.button} >Login</Button>
-            <Button style={{ marginLeft:"10px"}} >Register</Button>
+            <Button style={{ marginLeft:"10px", fontSize:"21px"}} >Join today!</Button>
             </Box>
         </Fragment>
     )
