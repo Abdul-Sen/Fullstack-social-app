@@ -8,7 +8,8 @@ require('dotenv').config();
 //! Single instance run
 var UserCollection = (() => {
     try {
-        const DB_URL = process.env.DB_ROOT + process.env.DB_USERS;
+        const DB_URL = (process.env.ATLAS ? process.env.ATLAS : (process.env.DB_ROOT + process.env.DB_USERS));
+
         console.log(`Connecting to ${DB_URL}`);
 
         mongoose.set('useUnifiedTopology', true);
