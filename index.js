@@ -64,7 +64,9 @@ function verifyToken(req,res,next)
 app.post('/api/login',[
 	check('userName').isLength({min: 6}).isAlphanumeric()
 ], (req,res)=>{
-
+	console.log(`Object from client is...`)
+	console.log(req.body);
+	
 	errors = validationResult(req);
 	
 	if (!errors.isEmpty()) {
