@@ -9,13 +9,9 @@ require('dotenv').config();
 var UserCollection = (() => {
     try {
         const DB_URL = (process.env.ATLAS ? process.env.ATLAS : (process.env.DB_ROOT + process.env.DB_USERS));
-
         console.log(`Connecting to ${DB_URL}`);
 
-        mongoose.set('useUnifiedTopology', true);
-        mongoose.set('useNewUrlParser', true);
-
-        const db = mongoose.createConnection(DB_URL);
+        const db = mongoose.createConnection(DB_URL,{useNewUrlParser: true, dbName:process.env.DB_USERS, useUnifiedTopology: true});
         db.on('error', (err)=>{
             console.log("db1 error!");
             console.log(err);
@@ -25,14 +21,18 @@ var UserCollection = (() => {
             console.log("userAuth success!");
           });
           
-         return (db.model(process.env.DB_USERS,userSchema,process.env.DB_USERS));
-    }
+          return (db.model(process.env.DB_USERS,userSchema,process.env.DB_USERS));
+        }
     catch (err) {
         console.log("userAuth Failed to connect to MongoDB instance");
         console.log(err);
         return -1;
     }
 })();
+
+console.log(`==================================================`)
+console.log(UserCollection);
+console.log(`==================================================`)
 
 /**
 * Get the list of all the users in the DB, dont know why but you can do it.
@@ -66,6 +66,8 @@ module.exports.createNewUser = async function(userData) {
 module.exports.loginUser = async function(userCred) {
     
     let dbUser = await UserCollection.findOne({ userName: userCred.userName }).exec();
+    console.log(`DBUSER IS....XXXX`);
+    console.log(dbUser);
 
     let matchingPassword = await bcrypt.compare(userCred.password,dbUser.password);
 

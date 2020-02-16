@@ -8,8 +8,8 @@ var MockUserModel = (() => {
         const DB_URL = (process.env.ATLAS ? process.env.ATLAS : (process.env.DB_ROOT + process.env.DB_MOCKUSERS));
         console.log(`Connecting to ${DB_URL}`);
 
-        mongoose.set('useUnifiedTopology', true);
-        mongoose.set('useNewUrlParser', true);
+
+        const db = mongoose.createConnection(DB_URL,{useNewUrlParser: true, dbName:process.env.DB_MOCKUSERS, useUnifiedTopology: true});
 
         const db = mongoose.createConnection(DB_URL);
         db.on('error', (err)=>{
