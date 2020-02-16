@@ -11,7 +11,6 @@ var MockUserModel = (() => {
 
         const db = mongoose.createConnection(DB_URL,{useNewUrlParser: true, dbName:process.env.DB_MOCKUSERS, useUnifiedTopology: true});
 
-        const db = mongoose.createConnection(DB_URL);
         db.on('error', (err)=>{
             console.log("db1 error!");
             console.log(err);
