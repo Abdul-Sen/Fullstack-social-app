@@ -54,7 +54,7 @@ function LoginUserForm(props) {
         event.preventDefault();
         console.log(userInfo);
 
-        fetch("api/login",{
+        fetch( (process.env.REACT_APP_PUBLIC_URL?process.env.REACT_APP_PUBLIC_URL: null) + "api/login",{
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -80,6 +80,9 @@ function LoginUserForm(props) {
         <Grid container direction="column" justify="center" alignItems="center" spacing={3}>
             <Grid item md={12} sm={12} xs={12}>
                 <Typography component="h1" variant="h5">Sign In</Typography>
+            </Grid>
+            <Grid item md={12} sm={12} xs={12}>
+                <Typography component="h1" variant="caption">Hint: try username &#38; password 'demoUser123'</Typography>
             </Grid>
             <Grid item md={12} sm={12} xs={12}>
                 <TextField

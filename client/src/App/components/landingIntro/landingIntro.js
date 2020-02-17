@@ -1,6 +1,8 @@
 import { Grid, Typography, Box, Button } from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
+import * as ROUTES from '../../routes/route';
 
 const useStyles = makeStyles(theme=>({
     button:{
@@ -38,8 +40,12 @@ function LandingIntro(props) {
                 </Box>
             </Typography>
             <Box component="span" m={1}>
+            <Link to={ROUTES.LOGIN} style={{ textDecoration: "none", color: "white" }}>
             <Button className={cssStyles.button} >Login</Button>
+            </Link>
+            <Link to={ROUTES.REGISTER} style={{ textDecoration: "none", color: "white" }}>
             <Button style={{ marginLeft:"10px", fontSize:"21px"}} >Join today!</Button>
+            </Link>
             </Box>
         </Fragment>
     )

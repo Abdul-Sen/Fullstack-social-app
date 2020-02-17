@@ -17,7 +17,7 @@ function LoggedIn(props) {
                                 </Link>
                         </Grid>
                         <Grid item md={1} style={{ marginLeft: "auto" }}>
-                                <UserProfile />
+                                <UserProfile redirectOnLogout="/" />
                         </Grid>
                 </Fragment>
         )

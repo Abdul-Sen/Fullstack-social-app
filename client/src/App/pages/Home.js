@@ -22,8 +22,6 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       minHeight: "100vh",
       padding: "50px",
-      minHeight: "100vh",
-      // padding:"50px",
       background: `url(${process.env.PUBLIC_URL + '/images/bg.jfif'}) no-repeat center fixed`,
       backgroundSize: "100% auto",
       backdropFilter: "blur(3px)",

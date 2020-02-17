@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { CssBaseline, Grid, makeStyles, Card, CardContent, Typography, Box } from '@material-ui/core';
+import { CssBaseline, Grid, makeStyles, Card, CardContent, Typography, Box, Container } from '@material-ui/core';
 import RegisterUser from '../components/shared/registerUser/registerUser';
 
 const useStyles = makeStyles(theme => ({
@@ -31,12 +31,12 @@ function Register(props) {
     return (
         <Fragment>
             <CssBaseline />
+            <Container gutterBottom={false}                 className={cssStyle.root}>
             <Grid
                 container
                 direction="column"
                 justify="center"
                 alignItems="center"
-                className={cssStyle.root}
                 spacing={2}>
 
                 <Grid item md={10} sm={12} xs={12} >
@@ -71,6 +71,7 @@ function Register(props) {
                     </Card>
                 </Grid>
             </Grid>
+            </Container>
         </Fragment>
     )
 }

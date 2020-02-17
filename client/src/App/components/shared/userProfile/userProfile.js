@@ -3,12 +3,15 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Menu,MenuItem } from '@material-ui/core';
 import { useSelector, useDispatch } from "react-redux";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import {useHistory } from 'react-router-dom';
 
 
 function UserProfile(props) {
     const {loginStatus} = useSelector(globalState =>({...globalState.loginReducer}));    
     const dispatch = useDispatch();
     const [anchorElement, setAnchorElement] = useState(null);
+    const history = useHistory();
+
 
     const handleLogout = ()=>{
         handleClose();
@@ -17,6 +20,10 @@ function UserProfile(props) {
             type: "UPDATE_STATE",
             payload: false
           });
+          if(props.redirectOnLogout)
+          {
+            history.push(props.redirectOnLogout);
+          }        
     }
 
     const handleClick = (event) => {

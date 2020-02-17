@@ -25,7 +25,7 @@ function RegisterUser(props) {
 
         //TODO: Call validate function
         //TODO: Loading spinner implimentation?
-        fetch("api/register",{
+        fetch( (process.env.REACT_APP_PUBLIC_URL? process.env.REACT_APP_PUBLIC_URL : null) + "api/register",{
             method: "POST",
             headers: {
                 'Accept': 'application/json',
