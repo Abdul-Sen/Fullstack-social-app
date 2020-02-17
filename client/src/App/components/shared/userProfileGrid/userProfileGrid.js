@@ -26,7 +26,7 @@ function UserStateProfile(props) {
     }, [userData]);
 
     const fetchData = () => {
-        fetch((process.env.REACT_APP_PUBLIC_URL?process.env.REACT_APP_PUBLIC_URL: null) + `api/getMockPage/?page=${Number(userData.page) + 1}`)
+        fetch((process.env.REACT_APP_PUBLIC_URL?process.env.REACT_APP_PUBLIC_URL: "") + `api/getMockPage/?page=${Number(userData.page) + 1}`)
             .then(function (response) {
                 return response.json();
             })

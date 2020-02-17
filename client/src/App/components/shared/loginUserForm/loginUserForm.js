@@ -54,7 +54,7 @@ function LoginUserForm(props) {
         event.preventDefault();
         console.log(userInfo);
 
-        fetch( (process.env.REACT_APP_PUBLIC_URL?process.env.REACT_APP_PUBLIC_URL: null) + "api/login",{
+        fetch( (process.env.REACT_APP_PUBLIC_URL?process.env.REACT_APP_PUBLIC_URL: "") + "api/login",{
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
