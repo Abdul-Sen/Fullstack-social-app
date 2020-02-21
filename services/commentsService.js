@@ -9,7 +9,7 @@ var CommentsModel = (() => {
         console.log(`Connecting to ${DB_URL}`);
 
 
-        const db = mongoose.createConnection(DB_URL,{useNewUrlParser: true, dbName:process.env.DB_COMMENTS, useUnifiedTopology: true});
+        const db = mongoose.createConnection(DB_URL,{useNewUrlParser: true, useFindAndModify: false ,dbName:process.env.DB_COMMENTS, useUnifiedTopology: true});
 
         db.on('error', (err)=>{
             console.log("db1 error!");
@@ -43,15 +43,16 @@ module.exports.addComment = async function (comment){
 module.exports.addReply = async function(comment)
 {
     console.log(comment);
-    // await CommentsModel.findOneAndUpdate(
-    //     {
-    //         "_id": comment.???
-    //     }
-    // ) 
-    // await CommentsModel.updateOne({
-
-    // } )
-
+   let result =  await CommentsModel.findOneAndUpdate(
+        {
+            "_id": comment._id
+        },
+        {
+            $set: {
+                "comments": comment.comments
+            }
+        });
+        return result;
 }
 
 module.exports.getThreadComments = async function(threadID)

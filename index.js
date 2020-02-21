@@ -202,11 +202,18 @@ app.get(`/api/threadComments/:threadID`,(req,res)=>{
 	})
 })
 
-app.post('/api/addReply'),(req,res)=>{
+//todo : Validate to make sure json has parent
+app.post('/api/addReply', (req,res)=>{
+
 	commentService.addReply(req.body).then((data)=>{
-		res.status(200).send("reply added"); //TODO: There shouldn't be a reponse to post request
+		console.log(`data is...`);
+		console.log(data);
+		res.status(200).send("comment chain updated");
+	}).catch((err)=>{
+		console.log(err);
+		res.status(500).send('error updating comment chain');
 	})
-}
+})
 
 //todo : Validate to make sure json has parent
 app.post('/api/addComment', (req,res)=>{
