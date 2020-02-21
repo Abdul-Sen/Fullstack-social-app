@@ -3,6 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const userAuthService = require('./services/userAuthService');
 const mockUsersService = require('./services/mockUsersService');
+const commentService = require('./services/commentsService');
 const { check, validationResult, sanitizeBody } = require('express-validator');
 const {query} = require('express-validator/check')
 const cors = require('cors')
@@ -105,6 +106,7 @@ app.get('/api/getMockPage',[
 	}
 });
 
+
 // An api endpoint for registering new users
 app.post('/api/register', [
 	check('userName').isLength({min: 6}).withMessage("username must be at least 6 characters long").isAlphanumeric().withMessage("only alphanumeric characters allowed for username"),
@@ -166,12 +168,51 @@ app.get('/api/getAllUsers', (req,res)=>{
 	
 })
 
+app.get('/api/getAllComments', (req,res)=>{
+
+	commentService.getAllComments().then((data)=>{
+		console.log(data);
+		res.json(JSON.stringify(data));
+	}).catch((err)=>{
+		console.log(err);
+		res.send("failed");
+	})	
+})
+
 
 app.get('/api/getAllMockUsers', (req,res)=>{
 
 	mockUsersService.getAllUsers().then((data)=>{
 		console.log(data);
 		res.json(JSON.stringify(data));
+	}).catch((err)=>{
+		console.log(err);
+	})
+	
+})
+
+app.get(`/api/threadComments/:threadID`,(req,res)=>{
+	console.log(req.params);
+	commentService.getThreadComments(req.params.threadID).then((data)=>{
+		console.log(data);
+		res.status(200).json(data);
+	}).catch((err)=>{
+		console.log(err);
+		res.status(500).json({"error":`failed to load data`,"details":JSON.stringify(err)});
+	})
+})
+
+app.post('/api/addReply'),(req,res)=>{
+	commentService.addReply(req.body).then((data)=>{
+		res.status(200).send("reply added"); //TODO: There shouldn't be a reponse to post request
+	})
+}
+
+//todo : Validate to make sure json has parent
+app.post('/api/addComment', (req,res)=>{
+
+	commentService.addComment(req.body).then((data)=>{
+		res.status(200).send("comment added"); //TODO: There shouldn't be a reponse to post request
 	}).catch((err)=>{
 		console.log(err);
 	})

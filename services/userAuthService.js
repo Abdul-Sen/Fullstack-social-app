@@ -24,15 +24,11 @@ var UserCollection = (() => {
           return (db.model(process.env.DB_USERS,userSchema,process.env.DB_USERS));
         }
     catch (err) {
-        console.log("userAuth Failed to connect to MongoDB instance");
+        console.log("userAuth service Failed to connect to MongoDB instance");
         console.log(err);
         return -1;
     }
 })();
-
-console.log(`==================================================`)
-console.log(UserCollection);
-console.log(`==================================================`)
 
 /**
 * Get the list of all the users in the DB, dont know why but you can do it.
@@ -66,9 +62,6 @@ module.exports.createNewUser = async function(userData) {
 module.exports.loginUser = async function(userCred) {
     
     let dbUser = await UserCollection.findOne({ userName: userCred.userName }).exec();
-    console.log(`DBUSER IS....XXXX`);
-    console.log(dbUser);
-
     let matchingPassword = await bcrypt.compare(userCred.password,dbUser.password);
 
     console.log(`password matching? ${matchingPassword}`);

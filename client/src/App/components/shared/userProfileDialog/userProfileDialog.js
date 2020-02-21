@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
+import CommentSection from '../commentSection/commentSection';
 // import { Icon } from "leaflet";
 
 import {
@@ -142,6 +143,7 @@ function UserProfileDialog(props) {
                 </Grid>
                 <Grid item md={12} sm={12} xs={12}>
                   //TODO: comments here
+                  <CommentSection id={props.userData._id} />
                 </Grid>
               </Grid>
             </Paper>
