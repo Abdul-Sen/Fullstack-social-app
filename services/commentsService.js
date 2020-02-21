@@ -48,7 +48,7 @@ module.exports.addReply = async function(comment)
             "_id": comment._id
         },
         {
-            $set: {
+            $push: {
                 "comments": comment.comments
             }
         });
