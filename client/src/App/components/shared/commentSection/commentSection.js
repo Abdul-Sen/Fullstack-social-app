@@ -30,10 +30,9 @@ function CommentSection(props) {
                         </Box>
                     </Typography>
                 </Grid>
-                <Grid item md={12} sm={12} xs={12}>
+                <Grid item md={8} sm={12} xs={12}>
                     <Suspense fallback={<div>loading comments...</div>}>
                     <Comments id={props.id} /> 
-
                     </Suspense>
                 </Grid>
                 
