@@ -2,7 +2,6 @@ import React, { Fragment, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 import CommentSection from '../commentSection/commentSection';
-// import { Icon } from "leaflet";
 
 import {
   Grid,
@@ -73,7 +72,6 @@ function UserProfileDialog(props) {
                   md={12}
                   sm={12}
                   xs={12}
-                  // style={{ alignSelf: "flex-start" }}
                 >
                   <Box
                     display="inline-flex"
