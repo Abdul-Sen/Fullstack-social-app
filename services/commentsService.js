@@ -43,15 +43,11 @@ module.exports.addComment = async function (comment){
 module.exports.addReply = async function(comment)
 {
     console.log(comment);
-   let result =  await CommentsModel.findOneAndUpdate(
-        {
-            "_id": comment._id
-        },
-        {
-            $push: {
-                "comments": comment.comments
-            }
-        });
+    let result = await CommentsModel.replaceOne({
+        "_id": comment._id
+    },
+    comment
+    );
         return result;
 }
 

@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { TextField, Button } from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 const cssStyles = makeStyles((theme) => ({
     root:{
@@ -14,12 +14,18 @@ const cssStyles = makeStyles((theme) => ({
 }))
 
 function ReplyComponent(props) { //Accept thread ID or whole comment object?
+    const commentsData = useSelector(currentState => currentState.commentsReducer);
+
+    useEffect(()=>{
+        if(message.userMessage!="")
+        {
+            addCommentDB();
+            props.close();
+        }
+    },[commentsData]);
+
     const [message,setMessage] = useState({userMessage:""});
     const dispatch = useDispatch();
-    console.log(`this is the comment you are replying to...: `);
-    console.log(props);
-    console.log(message);
-
     const useCss = cssStyles();
 
     const handleMessageEvent = (event)=>{
@@ -29,19 +35,35 @@ function ReplyComponent(props) { //Accept thread ID or whole comment object?
             [name]: value
         }));
     }
+
+    async function addCommentDB(){
+        let payload = commentsData.data.find((value)=> value._id == props.root);
+        console.log(JSON.stringify(payload));
+
+       let result = await fetch( (process.env.REACT_APP_PUBLIC_URL?process.env.REACT_APP_PUBLIC_URL: "") + "api/addReply ",{
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload)
+        });
+
+        result = await result.json();
+        console.log(result);
+    }
+
     const submitReplyEvent = ()=>{
-        const userPayload = {
+        const reduxPayload = {
             comment: message.userMessage,
             author: "replying User",
             parent: props.id
         }
-        // update state locally
-        // push new state to server
         dispatch({
             type: "ADD_COMMENT",
-            payload: userPayload
+            payload: reduxPayload
         });
     }
+
     return (
         <Fragment>
             <div className={useCss.root}>

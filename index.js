@@ -204,7 +204,6 @@ app.get(`/api/threadComments/:threadID`,(req,res)=>{
 
 //todo : Validate to make sure json has parent
 app.post('/api/addReply', (req,res)=>{
-
 	commentService.addReply(req.body).then((data)=>{
 		console.log(`data is...`);
 		console.log(data);

@@ -43,16 +43,12 @@ function PageComments(props){
         <Fragment>
             <p>Page comments</p>
             <button onClick={fetchThreadComments} >Fetch comments</button>
-            <pre>{JSON.stringify(commentsData, null, 2) }</pre>
-<ol>
+
             {
                 commentsData.data.map((value,index)=>{
-                    return <Comment data={value}/>
+                    return <Comment key={index} data={value} root={value._id}/>
                 })
             }
-</ol>
-            <Comment data={commentsData.data} />
-
         </Fragment>
     )
 }
