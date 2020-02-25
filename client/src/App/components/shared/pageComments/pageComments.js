@@ -2,6 +2,8 @@ import React, {Fragment, useState, useEffect} from 'react';
 import PropTypes from "prop-types";
 import {useDispatch, useSelector} from 'react-redux';
 import Comment from '../comment/comment';
+import {Grid} from '@material-ui/core';
+import AddComment from '../addComment/addComment';
 
 
 PageComments.propTypes = {
@@ -41,14 +43,23 @@ function PageComments(props){
     
     return(
         <Fragment>
-            <p>Page comments</p>
-            <button onClick={fetchThreadComments} >Fetch comments</button>
-
+            <Grid
+  container
+  direction="column"
+  justify="flex-start"
+  alignItems="stretch"
+>
+    <Grid item md={8} sm={12} xs={12}>
+        <AddComment />
+    </Grid>
+    <Grid item md={12} sm={12} xs={12}>
             {
                 commentsData.data.map((value,index)=>{
                     return <Comment key={index} data={value} root={value._id}/>
                 })
             }
+    </Grid>
+            </Grid>
         </Fragment>
     )
 }
