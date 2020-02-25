@@ -63,6 +63,7 @@ function UserProfileCard(props) {
         <UserProfileDialog
           userData={props.userData}
           dialogStatus={showDialog}
+          closeDialog={showDialogEvent}
         />
       ) : (
         console.log("showDialog was... " + showDialog)

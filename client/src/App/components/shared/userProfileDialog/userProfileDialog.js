@@ -49,6 +49,9 @@ function UserProfileDialog(props) {
   const [openDialog, setOpenDialog] = useState(true);
   const handleClose = () => {
     setOpenDialog(false);
+    setTimeout(()=>{
+      props.closeDialog()
+    },1000);
   };
 
   return (

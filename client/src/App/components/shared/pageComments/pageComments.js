@@ -15,7 +15,7 @@ function PageComments(props){
     const dispatch = useDispatch();
     const [isLoaded,setIsLoaded] = useState(false);
     const commentsData = useSelector(currentState => currentState.commentsReducer);
-
+    
     useEffect(()=>{
         fetchThreadComments();
 
@@ -50,7 +50,10 @@ function PageComments(props){
   alignItems="stretch"
 >
     <Grid item md={8} sm={12} xs={12}>
-        <AddComment />
+        {
+            isLoaded &&
+            <AddComment parentID={props.id} />
+        }
     </Grid>
     <Grid item md={12} sm={12} xs={12}>
             {

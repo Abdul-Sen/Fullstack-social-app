@@ -7,7 +7,7 @@ import Moment from 'react-moment';
 
 const cssStyles = makeStyles((theme) => ({
     root: {
-        marginTop: "20px",
+        marginTop: "10px",
         marginLeft: "30px",
         marginBottom: "0px"
     },

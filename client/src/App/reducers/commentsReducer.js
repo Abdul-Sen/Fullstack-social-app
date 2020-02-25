@@ -7,7 +7,7 @@ function commentsReducer(currentState ={data: []}, actionRequested) {
           ...currentState,
           data: [...actionRequested.payload]
         };
-      case "ADD_COMMENT":
+      case "ADD_REPLY":
         const newItem = {
           comment: actionRequested.payload.comment,
           author: actionRequested.payload.author,
@@ -18,6 +18,10 @@ function commentsReducer(currentState ={data: []}, actionRequested) {
           let res = findObjectById(draftState.data,actionRequested.payload.parent);
           res.comments.push(newItem);
         });
+        case "ADD_COMMENT":
+          return produce(currentState,(draftState)=>{
+            draftState.data.unshift(actionRequested.payload);
+          });
         case "DEFAULT_STATE":
         return {
           data: []

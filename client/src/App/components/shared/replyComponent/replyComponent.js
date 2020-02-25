@@ -56,10 +56,11 @@ function ReplyComponent(props) { //Accept thread ID or whole comment object?
         const reduxPayload = {
             comment: message.userMessage,
             author: "replying User",
-            parent: props.id
+            parent: props.id,
+            edited: false
         }
         dispatch({
-            type: "ADD_COMMENT",
+            type: "ADD_REPLY",
             payload: reduxPayload
         });
     }
