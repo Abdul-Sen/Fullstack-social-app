@@ -32,7 +32,11 @@ function PageComments(props){
     // const [data,setData]= useState({});
 
     async function fetchThreadComments() {
-        let data = await fetch((process.env.REACT_APP_PUBLIC_URL ? process.env.REACT_APP_PUBLIC_URL : "") + `api/threadComments/${props.id}`);
+        let data = await fetch((process.env.REACT_APP_PUBLIC_URL ? process.env.REACT_APP_PUBLIC_URL : "") + `api/threadComments/${props.id}`,{
+            headers:{
+                "authorization": `Bearer ${sessionStorage.getItem('token')}`
+            }
+        });
         data = await data.json();
         dispatch({
             type: "ADD_FETCHED_COMMENTS",
@@ -48,6 +52,7 @@ function PageComments(props){
   direction="column"
   justify="flex-start"
   alignItems="stretch"
+  style={{overflow:"hidden"}}
 >
     <Grid item md={8} sm={12} xs={12}>
         {

@@ -63,7 +63,8 @@ function LoginUserForm(props) {
         })
         .then((res)=> res.json())
         .then((response)=>{
-            sessionStorage.setItem("token",response.token)
+            sessionStorage.setItem("token",response.token);
+            sessionStorage.setItem("user",response.user);
             if(props.redirect)
             {
                 handleLoginChange(true)

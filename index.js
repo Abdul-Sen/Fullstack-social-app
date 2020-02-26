@@ -77,7 +77,8 @@ app.post('/api/login',[
 	userAuthService.loginUser(req.body).then((data)=>{
 
 		res.json({
-			token: data
+			token: data,
+			user: req.body.userName
 		});
 
 	}).catch((err)=>{
@@ -191,7 +192,7 @@ app.get('/api/getAllMockUsers', (req,res)=>{
 	
 })
 
-app.get(`/api/threadComments/:threadID`,(req,res)=>{
+app.get(`/api/threadComments/:threadID`,verifyToken,(req,res)=>{
 	console.log(req.params);
 	commentService.getThreadComments(req.params.threadID).then((data)=>{
 		console.log(data);
@@ -203,7 +204,7 @@ app.get(`/api/threadComments/:threadID`,(req,res)=>{
 })
 
 //todo : Validate to make sure json has parent
-app.post('/api/addReply', (req,res)=>{
+app.post('/api/addReply', verifyToken, (req,res)=>{
 	commentService.addReply(req.body).then((data)=>{
 		console.log(`data is...`);
 		console.log(data);
@@ -215,7 +216,7 @@ app.post('/api/addReply', (req,res)=>{
 })
 
 //todo : Validate to make sure json has parent
-app.post('/api/addComment', (req,res)=>{
+app.post('/api/addComment',verifyToken,(req,res)=>{
 
 	commentService.addComment(req.body).then((data)=>{
 		res.status(200).send("comment added"); //TODO: There shouldn't be a reponse to post request

@@ -56,6 +56,7 @@ function AddComment(props) {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
+                "authorization": `Bearer ${sessionStorage.getItem('token')}`
             },
             body: JSON.stringify(payload)
         });
@@ -67,7 +68,7 @@ function AddComment(props) {
     const addCommentHandler = ()=>{
         const reduxPayload = {
             comment: commentstate.comment,
-            author: "replying User",
+            author: sessionStorage.getItem('user'),
             parentID: props.parentID,
             edited: false,
             comments: []

@@ -44,6 +44,7 @@ function ReplyComponent(props) { //Accept thread ID or whole comment object?
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
+                "authorization": `Bearer ${sessionStorage.getItem('token')}`
             },
             body: JSON.stringify(payload)
         });
@@ -55,7 +56,7 @@ function ReplyComponent(props) { //Accept thread ID or whole comment object?
     const submitReplyEvent = ()=>{
         const reduxPayload = {
             comment: message.userMessage,
-            author: "replying User",
+            author: sessionStorage.getItem('user'),
             parent: props.id,
             edited: false
         }
