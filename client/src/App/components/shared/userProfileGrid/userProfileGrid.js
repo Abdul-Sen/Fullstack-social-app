@@ -69,7 +69,7 @@ function UserStateProfile(props) {
             >
                 {userDataArray.map((value, index) => {
                     return (
-                        <Grid item md={6} sm={12} xs={12} >
+                        <Grid item md={5} sm={12} xs={12} >
                             <UserProfileCard userData={value} />
                         </Grid>
                     );

@@ -9,9 +9,8 @@ const useStyles = makeStyles({
     margin: "50px",
     boxShadow:
       "0 1px 2px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.07), 0 4px 8px rgba(0,0,0,0.07), 0 8px 16px rgba(0,0,0,0.07),0 16px 32px rgba(0,0,0,0.07), 0 32px 64px rgba(0,0,0,0.07)",
-    width: "400px",
     height: "auto",
-    borderRadius: "10%",
+    borderRadius: "40px",
     overflow: "hidden",
     "& div#user": {
       backgroundImage: "url(https://source.unsplash.com/random)",
@@ -36,13 +35,11 @@ const useStyles = makeStyles({
       }
     },
     "& #contactInfo": {
-      // backgroundColor: "#afafaf",
       paddingLeft: "20px",
       paddingBottom: "20px"
     }
   }
 });
-// clipPath: "polygon( 0 0,100% 0, 100% 100%, 0 calc(100% - 5vw) )",
 
 function UserProfileCard(props) {
   const cssStyle = useStyles();

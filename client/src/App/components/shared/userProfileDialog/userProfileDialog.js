@@ -41,7 +41,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 function UserProfileDialog(props) {
-  console.log(props.userData); // TEMP
   const { latitude, longitude } = { ...props.userData.location.coordinates };
 
   const cssStyles = styles();
@@ -144,9 +143,7 @@ function UserProfileDialog(props) {
                   </Box>
                 </Grid>
                 <Grid item md={12} sm={12} xs={12}>
-                  //TODO: comments here
                   <PageComments id={props.userData._id}/>
-                  {/* <CommentSection id={props.userData._id} /> */}
                 </Grid>
               </Grid>
             </Paper>

@@ -1,7 +1,8 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { Grid, Button, Typography, Paper, Box } from '@material-ui/core';
+import { Grid, Button, Typography, Paper, Box,TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ReplyComponent from '../replyComponent/replyComponent';
+import EditComment from '../editComment/editComment';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import Moment from 'react-moment';
 
@@ -27,6 +28,13 @@ const cssStyles = makeStyles((theme) => ({
 }))
 
 export default function Comment(props) {
+
+    const handleEditEvent =()=>{
+        setOpenEdit(!openEdit);
+    }
+
+    const [openEdit,setOpenEdit] = useState(false);
+
     const useCss = cssStyles();
     const [openReply, setOpenReply] = useState(false);
     const handleReplyEvent = (event) => {
@@ -57,12 +65,20 @@ export default function Comment(props) {
                         </Grid>
                         <Typography component={'span'} variant="body2">
                             <Box marginLeft="40px" textAlign="justify">
-                                {props.data.comment}
+                                {
+                                    (openEdit==false? <p>{props.data.comment}</p>:
+                                        <EditComment message={props.data.comment} root={props.root} id={props.data._id} close={handleEditEvent} />
+                                    )
+                                }
                             </Box>
                         </Typography>
                         <Button onClick={handleReplyEvent} size="small" className={useCss.replyButton}>
                             reply
                                 </Button>
+                        {sessionStorage.getItem('user') == props.data.author ?
+                        <Button onClick={handleEditEvent} size="small" className={useCss.replyButton}>
+                            edit
+                        </Button> : ""}
                     </Paper>
                     {openReply && <ReplyComponent root={props.root} id={props.data._id} close={handleReplyEvent} />}
                 </Grid>

@@ -28,10 +28,6 @@ function AddComment(props) {
     const dispatch = useDispatch();
 
     useEffect(()=>{
-        console.log(`comment is ${commentstate.comment}`);
-    },[commentstate.comment]);
-
-    useEffect(()=>{
         if(commentstate.send == true)
         {
             addCommentDB();
@@ -47,7 +43,7 @@ function AddComment(props) {
     async function addCommentDB(){
         const payload = {
             comment: commentstate.comment,
-            author: "replying User",
+            author: sessionStorage.getItem('user'),
             parentID: props.parentID,
             edited: false,
             comments: []

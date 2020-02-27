@@ -18,10 +18,16 @@ function commentsReducer(currentState ={data: []}, actionRequested) {
           let res = findObjectById(draftState.data,actionRequested.payload.parent);
           res.comments.push(newItem);
         });
+        case "UPDATE_COMMENT":
+          return produce(currentState,(draftState)=>{
+            let res = findObjectById(draftState.data,actionRequested.payload.parent);
+             res.comment = actionRequested.payload.comment;
+             res.edited = actionRequested.payload.edited;
+          });
         case "ADD_COMMENT":
           return produce(currentState,(draftState)=>{
             draftState.data.unshift(actionRequested.payload);
-          });
+          });          
         case "DEFAULT_STATE":
         return {
           data: []

@@ -15,7 +15,7 @@ function PageComments(props){
     const dispatch = useDispatch();
     const [isLoaded,setIsLoaded] = useState(false);
     const commentsData = useSelector(currentState => currentState.commentsReducer);
-    
+
     useEffect(()=>{
         fetchThreadComments();
 
