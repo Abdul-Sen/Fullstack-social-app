@@ -31,7 +31,7 @@ function Register(props) {
     return (
         <Fragment>
             <CssBaseline />
-            <Container gutterBottom={false}                 className={cssStyle.root}>
+            <Container gutterBottom={false} maxWidth="false" className={cssStyle.root}>
             <Grid
                 container
                 direction="column"

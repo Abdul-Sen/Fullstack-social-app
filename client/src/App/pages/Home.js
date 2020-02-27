@@ -50,8 +50,8 @@ function Home(props) {
     <Fragment>
       <CssBaseline />
 
-      <Container disableGutters={true} className={cssStyle.root}>
-        <Container disableGutters={true} className={cssStyle.introContainer}>
+      <Container disableGutters={true} className={cssStyle.root} maxWidth="false" >
+        <Container disableGutters={true} className={cssStyle.introContainer} maxWidth="false" >
           <Grid container>
             <Grid item md={6}>
               <LandingIntro />
@@ -61,7 +61,7 @@ function Home(props) {
           </Grid>
 
         </Container>
-        <Container disableGutters={true}>
+        <Container disableGutters={true} maxWidth="false">
 
           <Grid container direction="row" wrap="wrap" justify="space-around" alignItems="stretch" alignContent="stretch" id="container2">
             <Grid item md={4}>
