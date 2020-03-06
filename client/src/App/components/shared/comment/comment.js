@@ -10,7 +10,7 @@ const cssStyles = makeStyles((theme) => ({
     root: {
         marginTop: "10px",
         marginLeft: "30px",
-        marginBottom: "0px"
+        marginBottom: "0px",
     },
     paper: {
         padding: "20px",

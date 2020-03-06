@@ -77,19 +77,19 @@ function UserProfileCard(props) {
         <div id="content">
           <Grid container direction="row" justify="center" alignItems="center">
             <Grid item md={12} sm={12} xs={12}>
-              <Typography variant="h5" gutterBottom>
+              <Typography component={"div"}  variant="h5" gutterBottom>
                 <Box textAlign="center">
                   {props.userData.name.first} {props.userData.name.last}
                 </Box>
               </Typography>
             </Grid>
             <Grid item md={12} sm={12} xs={12}>
-              <Typography variant="h6" gutterBottom>
-                <Box textAlign="center">{props.userData.devInfo.type}</Box>
+              <Typography component={"div"} variant="h6" gutterBottom>
+                <Box textAlign="center" fontWeight={"300"}>{props.userData.devInfo.type}</Box>
               </Typography>
             </Grid>
             <Grid item md={12} sm={12} xs={12}>
-              <Typography variant="overline" gutterBottom>
+              <Typography component={"div"} variant="overline" gutterBottom>
                 <Box textAlign="center">
                   <LocationOnIcon /> &ensp; {props.userData.location.city},{" "}
                   {props.userData.location.country}
@@ -105,25 +105,25 @@ function UserProfileCard(props) {
             alignItems="center"
           >
             <Grid item md={12} sm={12} xs={12}>
-              <Typography variant="body1">
+              <Typography component={"div"} variant="body1">
                 <Box fontStyle="italic" lineHeight={5}>
                   {props.userData.devInfo.intro}
                 </Box>
               </Typography>
             </Grid>
             <Grid item md={12} sm={12} xs={12}>
-              <Typography variant="caption">Email</Typography>
+              <Typography component={"div"} variant="caption">Email</Typography>
             </Grid>
             <Grid item md={12} sm={12} xs={12}>
-              <Typography variant="body1" gutterBottom={true}>
+              <Typography component={"div"} variant="body1" gutterBottom={true}>
                 {props.userData.email}
               </Typography>
             </Grid>
             <Grid item md={12} sm={12} xs={12}>
-              <Typography variant="caption">Phone</Typography>
+              <Typography component={"div"} variant="caption">Phone</Typography>
             </Grid>
             <Grid item md={12} sm={12} xs={12}>
-              <Typography variant="body1" gutterBottom={true}>
+              <Typography component={"div"} variant="body1" gutterBottom={true}>
                 {formatPhone(props.userData.phone)}
               </Typography>
             </Grid>

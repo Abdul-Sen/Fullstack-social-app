@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { TextField, Button } from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import {useDispatch, useSelector} from 'react-redux';
+import SendIcon from '@material-ui/icons/Send';
 
 const cssStyles = makeStyles((theme) => ({
     root:{
@@ -83,7 +84,15 @@ function EditComment(props) { //Accept thread ID or whole comment object?
             <div className={useCss.root}>
                             
                 <TextField onChange={handleMessageEvent} id="message-input-edit" rows="8" multiline={true} aria-describedby="message-helper-text" fullWidth variant="outlined" label="Message" name="userMessageEdit"  value={message.userMessageEdit}/>
-                <Button onClick={submitUpdateEvent}>Update comment</Button>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={submitUpdateEvent}
+                    endIcon={<SendIcon />}
+                >
+                    Update
+                </Button>
+
             </div>
         </Fragment>
     )

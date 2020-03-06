@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { TextField, Button } from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import {useDispatch, useSelector} from 'react-redux';
-
+import SendIcon from '@material-ui/icons/Send';
 const cssStyles = makeStyles((theme) => ({
     root:{
         marginTop:"20px",
@@ -70,7 +70,14 @@ function ReplyComponent(props) { //Accept thread ID or whole comment object?
             <div className={useCss.root}>
                             
                 <TextField onChange={handleMessageEvent} id="message-input" rows="8" multiline={true} aria-describedby="message-helper-text" fullWidth variant="outlined" label="Message" name="userMessage"  value={message.userMessage}/>
-                <Button onClick={submitReplyEvent}>Send reply</Button>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={submitReplyEvent}
+                    endIcon={<SendIcon />}
+                >
+                    Send reply
+                </Button>
             </div>
         </Fragment>
     )

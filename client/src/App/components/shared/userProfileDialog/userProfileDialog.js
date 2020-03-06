@@ -1,8 +1,8 @@
 import React, { Fragment, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 import PageComments from '../pageComments/pageComments';
-// import CommentSection from '../commentSection/commentSection';
+import CloseIcon from '@material-ui/icons/Close';
+import AddressRenderer from '../addressRenderer/addressRenderer';
 
 import {
   Grid,
@@ -14,8 +14,6 @@ import {
   Paper,
   Avatar
 } from "@material-ui/core";
-import CloseIcon from "@material-ui/icons/Close";
-import { popup } from "leaflet";
 
 const styles = makeStyles(theme => ({
   leaflet: {
@@ -27,7 +25,10 @@ const styles = makeStyles(theme => ({
     width: "90%",
     "& #paper": {
       padding: "20px"
-    }
+    },
+    '& #closeBtn': {
+      float: "right"
+    },
   },
 
   avatar: {
@@ -41,7 +42,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 function UserProfileDialog(props) {
-  const { latitude, longitude } = { ...props.userData.location.coordinates };
 
   const cssStyles = styles();
 
@@ -93,11 +93,13 @@ function UserProfileDialog(props) {
                     </Typography>
                     <Typography variant="subtitle1">
                       <Box paddingLeft="2px">
-                        {props.userData.gender == "female" ? "M, " : "F, "}{" "}
-                        {props.userData.dob.age}
+                       {", "} {props.userData.dob.age}
                       </Box>
                     </Typography>
                   </Box>
+                  <IconButton id="closeBtn" onClick={handleClose}>
+                      <CloseIcon />
+                  </IconButton>
                 </Grid>
 
                 <Grid
@@ -105,7 +107,7 @@ function UserProfileDialog(props) {
                   md={12}
                   sm={12}
                   xs={12}
-                  style={{ marginLeft: "25px", paddingTop: "20px" }}
+                  style={{ marginLeft: "25px", paddingTop: "20px" , paddingBottom:"20px"}}
                 >
                   <Typography variant="h4" gutterBottom={true}>
                     <Box paddingBottom="5px">Biography</Box>
@@ -114,33 +116,8 @@ function UserProfileDialog(props) {
                     <Box>{props.userData.devInfo.bio}</Box>
                   </Typography>
                 </Grid>
-                <Grid item md={12} sm={12} xs={12}>
-                  //TODO: friends here
-                </Grid>
-
-                <Grid item md={12} sm={12} xs={12}>
-                  <Box height="400px">
-                    <Map
-                      center={[latitude, longitude]}
-                      zoom={17}
-                      minZoom="16"
-                      maxZoom="18"
-                      className={cssStyles.leaflet}
-                    >
-                      <Marker position={[latitude, longitude]}>
-                        <Popup>
-                          {props.userData.location.street.number}{" "}
-                          {props.userData.location.street.name + ", "}
-                          {props.userData.location.city + ", "}
-                          {props.userData.location.country}
-                        </Popup>
-                      </Marker>
-                      <TileLayer
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                      />
-                    </Map>
-                  </Box>
+                <Grid item md={12} sm={12} xs={12} >
+                  <AddressRenderer location={props.userData.location} />
                 </Grid>
                 <Grid item md={12} sm={12} xs={12}>
                   <PageComments id={props.userData._id}/>
