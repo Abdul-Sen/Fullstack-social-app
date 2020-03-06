@@ -9,18 +9,18 @@ var MockUserModel = (() => {
         console.log(`Connecting to ${DB_URL}`);
 
 
-        const db = mongoose.createConnection(DB_URL,{useNewUrlParser: true, dbName:process.env.DB_MOCKUSERS, useUnifiedTopology: true});
+        const db = mongoose.createConnection(DB_URL, { useNewUrlParser: true, dbName: process.env.DB_MOCKUSERS, useUnifiedTopology: true });
 
-        db.on('error', (err)=>{
+        db.on('error', (err) => {
             console.log("db1 error!");
             console.log(err);
-          });
-          
-          db.once('open', ()=>{
+        });
+
+        db.once('open', () => {
             console.log("mockusers success!");
-          });
-          
-         return (db.model(process.env.DB_MOCKUSERS,mockUsersSchema,process.env.DB_MOCKUSERS));
+        });
+
+        return (db.model(process.env.DB_MOCKUSERS, mockUsersSchema, process.env.DB_MOCKUSERS));
     }
     catch (err) {
         console.log("mockUsers Failed to connect to MongoDB instance");
@@ -30,7 +30,7 @@ var MockUserModel = (() => {
 })();
 
 module.exports.getAllUsers = async function () {
-    
+
     return await MockUserModel.find({}).exec(); // Exec returns promises
 }
 
@@ -44,8 +44,22 @@ module.exports.getAllUsers = async function () {
 *        and metadata information that can be used to determine
 *        if more pages exist
 */
-module.exports.queryPages = async function(pageNumber) {
-   let docsTen = await MockUserModel.paginate({},{page:pageNumber, limit: 10});
+module.exports.queryPages = async function (pageNumber) {
+    let docsTen = await MockUserModel.paginate({}, { page: pageNumber, limit: 10 });
 
-   return docsTen;
+    return docsTen;
+}
+
+module.exports.updateCoordinates = async function (data) {
+
+    let res = await MockUserModel.updateOne(
+        {
+            "_id": data._id
+        },
+        {$set:{
+            "location.coordinates.latitude": data.coordinates.latitude,
+            "location.coordinates.longitude": data.coordinates.longitude
+            }
+        });
+    return res;
 }
