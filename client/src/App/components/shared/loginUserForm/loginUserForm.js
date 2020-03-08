@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Typography, TextField, Button, Snackbar } from '@material-ui/core';
+import { Grid, Typography, TextField, Button, Snackbar, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 
 
 const useStyles = makeStyles(theme => ({
-    altLogin: {
-        '& .MuiGrid-item': {
-            textAlign: "center"
-        }
+    root:{
+        marginBottom:"10px"
     },
-
     submitButton: {
         background: '#ec008c',
         background: 'linear-gradient(45deg, #fc6767, #ec008c)',
@@ -97,12 +94,12 @@ function LoginUserForm(props) {
 
     }
     return (
-        <Grid container direction="column" justify="center" alignItems="center" spacing={3}>
+        <Grid container className={cssStyle.root} direction="column" justify="center" alignItems="center" spacing={3}>
             <Grid item md={12} sm={12} xs={12}>
                 <Typography component="h1" variant="h5">Sign In</Typography>
             </Grid>
             <Grid item md={12} sm={12} xs={12}>
-                <Typography component="h1" variant="caption">Hint: try username &#38; password 'demoUser123'</Typography>
+                <Typography component="h1" variant="caption">Hint: try username &#38; password '<Box color={"red"} display={"inline"} >DemoUser</Box>'</Typography>
             </Grid>
             <Grid item md={12} sm={12} xs={12}>
                 <TextField
@@ -127,11 +124,8 @@ function LoginUserForm(props) {
                 >
                 </TextField>
             </Grid>
-            <Grid item md={12} sm={12} xs={12}>
+            <Grid item md={12} sm={12} xs={12} >
                 <Button onClick={handleSubmit} className={cssStyle.submitButton}>Submit</Button>
-            </Grid>
-            <Grid item md={12} sm={12} xs={12}>
-                <AltLogin />
             </Grid>
             <Snackbar anchorOrigin={{
                 vertical: 'bottom',
@@ -147,41 +141,5 @@ function LoginUserForm(props) {
         )
     }
     
-function AltLogin() {
-    const cssStyle = useStyles();
-        
-            return (
-        <Grid
-                container
-                direction="row"
-                justify="center"
-                alignItems="center"
-                spacing={2}
-                className={cssStyle.altLogin}
-            >
-
-                <Grid item md={12} sm={12} xs={12}>
-                    <Typography variant="overline" display="block" align="center" gutterBottom>
-                        Or login with
-            </Typography>
-                </Grid>
-                <Grid item md={4} sm={12} xs={12}>
-                    <Button>
-                        <Typography variant="subtitle2" gutterBottom align="center">
-                            Facebook
-                    </Typography>
-                    </Button>
-                </Grid>
-                <Grid item md={4} sm={12} xs={12}>
-                    <Button>
-                        <Typography variant="subtitle2" gutterBottom align="center">
-                            Google
-                    </Typography>
-
-                    </Button>
-                </Grid>
-            </Grid>
-            )
-        }
         
 export default LoginUserForm;

@@ -34,11 +34,10 @@ function RegisterUser(props) {
     });
 
     const validateUsername = (event)=>{
-        let pattern = new RegExp(/^[a-z0-9_-]{3,15}$/);
+        let pattern = new RegExp(/^[A-Za-z0-9_-]{3,15}$/);
         let result = pattern.test(event.target.value);
         if(result == false && event.target.value != "")
         {
-            
             handleFormState({[event.target.name]:{isValid: false, errorMessage:`only alphanumeric, '_' and '-' allowed`}});
         }
         else{
