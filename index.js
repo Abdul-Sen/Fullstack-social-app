@@ -63,28 +63,25 @@ function verifyToken(req,res,next)
 
 // logins user and sends JWT token
 app.post('/api/login',[
-	check('userName').isLength({min: 6}).isAlphanumeric()
+	check('userName').isLength({min: 6}).isAlphanumeric().withMessage("Username must be alphanumeric")
 ], (req,res)=>{
 	
-	errors = validationResult(req);
-	
-	if (!errors.isEmpty()) {
-		console.log("validation failed");
-		console.log(errors.array());
-		return res.status(422).json({ errors: errors.array() });
-	  }
-
 	userAuthService.loginUser(req.body).then((data)=>{
-
-		res.json({
-			token: data,
-			user: req.body.userName
-		});
-
+		if(data == -1)
+		{
+			res.status(401).json({error:"bad credentials"});
+		}
+		else
+		{
+			res.json({
+				token: data,
+				user: req.body.userName
+			});
+		}
 	}).catch((err)=>{
-
+		console.log(`internal server error on loginUser function`);
 		console.log(err);
-		res.send("failed to login user");
+		res.status(500).send("Server issues, please try later");
 	})
 
 });
