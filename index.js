@@ -104,6 +104,11 @@ app.get('/api/getMockPage',[
 	}
 });
 
+app.get('/api/getMockUsers',async (req,res)=>{
+	let serviceResult =  await mockUsersService.findByName(req.body.name);
+	res.json(serviceResult);
+});
+
 
 // An api endpoint for registering new users
 app.post('/api/register', [

@@ -29,6 +29,21 @@ var MockUserModel = (() => {
     }
 })();
 
+
+module.exports.findByName = async function (fullName) {
+    let firstNameMatches = await MockUserModel.find(
+        { "name.first": { "$regex": fullName, "$options": "i" } }
+    ).exec();
+
+    let lastNameMatches = await MockUserModel.find(
+        { "name.last": { "$regex": fullName, "$options": "i" } }
+    ).exec();
+    
+    let potentialUsers = [...firstNameMatches, ...lastNameMatches];
+    return potentialUsers;
+}
+
+
 module.exports.getAllUsers = async function () {
 
     return await MockUserModel.find({}).exec(); // Exec returns promises
@@ -56,9 +71,10 @@ module.exports.updateCoordinates = async function (data) {
         {
             "_id": data._id
         },
-        {$set:{
-            "location.coordinates.latitude": data.coordinates.latitude,
-            "location.coordinates.longitude": data.coordinates.longitude
+        {
+            $set: {
+                "location.coordinates.latitude": data.coordinates.latitude,
+                "location.coordinates.longitude": data.coordinates.longitude
             }
         });
     return res;
