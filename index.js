@@ -105,7 +105,8 @@ app.get('/api/getMockPage',[
 });
 
 app.get('/api/getMockUsers',async (req,res)=>{
-	let serviceResult =  await mockUsersService.findByName(req.body.name);
+	let name = req.query.name;
+	let serviceResult =  await mockUsersService.findByName(name);
 	res.json(serviceResult);
 });
 
