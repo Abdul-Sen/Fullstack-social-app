@@ -1,14 +1,24 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import useDebounce from '../../customHooks/useDebounce';
+import {useDispatch, useSelector} from 'react-redux'
 
 function SearchBar(props) {
 
   const getUsers = async (term) => {
     let results = (await fetch((process.env.REACT_APP_PUBLIC_URL ? process.env.REACT_APP_PUBLIC_URL : "") + `api/getMockUsers?name=${term}`));
     results = await results.json();
-    setUsers(results);
+    handleNewUsers({users: results, more: false});
   }
-  const [users, setUsers] = useState([]);
+  const dispatch = useDispatch();
+    
+  const handleNewUsers = (fetchedUsers)=>{
+      dispatch({
+          type: "NEW_USERS",
+          payload: fetchedUsers
+      });
+  }
+
+
   const [searchTerm, setSearchTerm] = useState('');
 
   const debouncedSearchTerm = useDebounce(searchTerm, 600);
@@ -17,8 +27,9 @@ function SearchBar(props) {
       if (debouncedSearchTerm != '' && debouncedSearchTerm != undefined) {
         getUsers(debouncedSearchTerm);
       }
-      else{
-        setUsers([]);
+      if(debouncedSearchTerm == '')
+      {
+        handleNewUsers({users: [],more: true});
       }
     }, [debouncedSearchTerm]);
 
@@ -28,7 +39,6 @@ function SearchBar(props) {
         placeholder="Search users"
         onChange={e => setSearchTerm(e.target.value)}
       />
-      <pre>{JSON.stringify(users, null, 2)}</pre>
     </Fragment>
   )
 }

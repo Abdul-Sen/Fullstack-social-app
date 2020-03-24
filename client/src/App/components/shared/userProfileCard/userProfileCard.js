@@ -60,14 +60,12 @@ function UserProfileCard(props) {
   
   return (
     <Fragment>
-            {showDialog == true ? (
+            {showDialog == true && (
         <UserProfileDialog
           userData={props.userData}
           dialogStatus={showDialog}
           closeDialog={showDialogEvent}
         />
-      ) : (
-        console.log("showDialog was... " + showDialog)
       )}
 
       <Paper elevation={0} className={cssStyle.root} onClick={showDialogEvent}>
