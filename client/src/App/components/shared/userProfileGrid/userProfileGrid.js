@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 const INITIAL_USERDATA = { docs: [], total: null, limit: 10, page: "0", pages: null };
 
 //{"docs":[],"total":200,"limit":10,"page":"21","pages":20}
-function UserStateProfile({ data = null }) {
+function UserStateProfile() {
 
     const dispatch = useDispatch();
 
@@ -61,15 +61,6 @@ function UserStateProfile({ data = null }) {
     }
 
     return (
-        <Grid
-            container
-            direction="row"
-            justify="space-evenly"
-            alignItems="stretch"
-        >
-            {data == null &&
-                <Grid item md={12} sm={12} xs={12}>
-
                     <InfiniteScroll
                         dataLength={userDataArray.users.length}
                         hasMore={userDataArray.more}
@@ -96,9 +87,6 @@ function UserStateProfile({ data = null }) {
                             })}
                         </Grid>
                     </InfiniteScroll>
-                </Grid>
-            }
-        </Grid>
     )
 
 }

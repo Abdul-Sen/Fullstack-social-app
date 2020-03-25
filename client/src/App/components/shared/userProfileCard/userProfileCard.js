@@ -6,7 +6,10 @@ import UserProfileDialog from '../userProfileDialog/userProfileDialog';
 
 const useStyles = makeStyles({
   root: {
-    margin: "50px",
+    margin: "auto",
+    marginTop: "50px",
+    marginBottom:"50px",
+    // margin: "50px",
     maxWidth: "400px",
     height: "auto",
     borderRadius: "40px",
