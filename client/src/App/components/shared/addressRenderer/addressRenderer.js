@@ -21,7 +21,7 @@ function AddressRenderer({location}){
         <Map
           center={[latitude, longitude]}
           zoom={17}
-          minZoom="16"
+          minZoom="13"
           maxZoom="18"
           className={cssStyles.leaflet}
         >

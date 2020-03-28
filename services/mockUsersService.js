@@ -30,17 +30,53 @@ var MockUserModel = (() => {
 })();
 
 
-module.exports.findByName = async function (fullName) {
-    let firstNameMatches = await MockUserModel.find(
-        { "name.first": { "$regex": fullName, "$options": "i" } }
-    ).exec();
+module.exports.findMockUsers = async function (fullName = null, country = null, role = null) {
 
-    let lastNameMatches = await MockUserModel.find(
-        { "name.last": { "$regex": fullName, "$options": "i" } }
-    ).exec();
+
+    let queryObj = {
+        "$or": fullName != null? [{"name.first": { "$regex": fullName, "$options": "i" }}, {"name.last": { "$regex": fullName, "$options": "i" }}] : undefined,
+        "location.country": country!= null? country: undefined,
+        "devInfo.type": role != null? {$in: [ ...role]}: undefined
+    };
+    console.log(queryObj);
+    Object.keys(queryObj).forEach(key => queryObj[key] === undefined ? delete queryObj[key] : {});
+    console.log(queryObj);
+
+    // if(fullName)
+    // {
+    //         queryObj.push("$or": [{"name.first": { "$regex": fullName, "$options": "i" }}, {"name.last": { "$regex": fullName, "$options": "i" }}]);
+    // }
+    // if(country)
+    // {
+    //     queryObj.push({"location.country": country});
+    // }
+    // if(role)
+    // {
+    //     queryObj.push({"devInfo.type": {$in: [ ...role]}});
+    // }
+    let tempResults1 = await MockUserModel.find({...queryObj});
+    console.log(tempResults1);
+    return tempResults1;
+
+    // let tempResults = await MockUserModel.find({
+    //     $or: [{"name.first": { "$regex": fullName, "$options": "i" }}, {"name.last": { "$regex": fullName, "$options": "i" }}],
+    //     "location.country": country,
+    //     "devInfo.type": {$in: [ ...role]}
+    // });
+
+    // console.log(tempResults);
+    // return tempResults;
+
+    // let firstNameMatches = await MockUserModel.find(
+    //     { "name.first": { "$regex": fullName, "$options": "i" } }
+    // ).exec();
+
+    // let lastNameMatches = await MockUserModel.find(
+    //     { "name.last": { "$regex": fullName, "$options": "i" } }
+    // ).exec();
     
-    let potentialUsers = [...firstNameMatches, ...lastNameMatches];
-    return potentialUsers;
+    // let potentialUsers = [...firstNameMatches, ...lastNameMatches];
+    // return potentialUsers;
 }
 
 

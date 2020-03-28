@@ -105,8 +105,14 @@ app.get('/api/getMockPage',[
 });
 
 app.get('/api/getMockUsers',async (req,res)=>{
-	let name = req.query.name;
-	let serviceResult =  await mockUsersService.findByName(name);
+	let {name, country, role} = req.query; //undefined
+
+		if(typeof role == "string") //assuming there is a role defined above, what happens if user doesnt send role?
+		{
+			role = new Array(role);
+		}
+		
+		let serviceResult =  await mockUsersService.findMockUsers(name,country,role);
 	res.json(serviceResult);
 });
 
