@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Grid, Box } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import Role from './role';
 import Country from './country';
 import ClearSearch from './clearSearch';
@@ -7,25 +7,18 @@ import ClearSearch from './clearSearch';
 function TuneContainer(props) {
     return (
         <Fragment>
-            <Grid
-                container
-                wrap="wrap"
-                direction="row"
-                justify="flex-start"
-                alignItems="center"
-                spacing={10}
-            >
-                <Box margin="20px"/>
-                <Grid item md={2}>
+            <Box component="div" maxWidth="400px" alignItems="center" justifyContent="flex-start" display="flex" >
+                <Box width="30px" color="red"></Box>
+                <Box flex="1" flexGrow="1">
                     <Country />
-                </Grid>
-                <Grid item md={2}>
+                </Box>
+                <Box flex="1" flexGrow="1">
                     <Role />
-                </Grid>
-                <Grid item md={2}>
+                </Box>
+                <Box flex="1" flexGrow="1">
                     <ClearSearch />
-                </Grid>
-            </Grid>
+                </Box>
+            </Box>
         </Fragment>
     )
 }

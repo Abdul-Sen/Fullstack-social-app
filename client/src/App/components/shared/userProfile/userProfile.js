@@ -27,8 +27,6 @@ function UserProfile(props) {
     }
 
     const handleClick = (event) => {
-        console.log("clicked");
-        console.log(event.currentTarget);
         setAnchorElement(event.currentTarget);
     }
 

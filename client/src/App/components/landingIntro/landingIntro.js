@@ -23,18 +23,18 @@ function LandingIntro(props) {
     const cssStyles = useStyles();
     return (
         <Fragment>
-            <Typography variant="h2" gutterBottom={true}>
+            <Typography variant="h2" gutterBottom={true} component="span">
                 <Box>
                     For developers, by developers
                 </Box>
             </Typography>
-            <Typography variant="h5">
+            <Typography variant="h5"  component="span">
                 <Box>
                     join the community!
                 </Box>
             </Typography>
             <hr style={{borderColor:"black"}}/>
-            <Typography variant="body1">
+            <Typography variant="body1"  component="span">
                 <Box paddingBottom="20px">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
                 </Box>

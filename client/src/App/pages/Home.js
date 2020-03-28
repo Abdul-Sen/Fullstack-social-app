@@ -50,8 +50,8 @@ function Home(props) {
     <Fragment>
       <CssBaseline />
 
-      <Container disableGutters={true} className={cssStyle.root} maxWidth="false" >
-        <Container disableGutters={true} className={cssStyle.introContainer} maxWidth="false" >
+      <Container disableGutters={true} className={cssStyle.root} maxWidth={false} >
+        <Container disableGutters={true} className={cssStyle.introContainer} maxWidth={false} >
           <Grid container>
             <Grid item md={6}>
               <LandingIntro />
@@ -61,7 +61,7 @@ function Home(props) {
           </Grid>
 
         </Container>
-        <Container disableGutters={true} maxWidth="false">
+        <Container disableGutters={true} maxWidth={false}>
 
           <Grid container direction="row" wrap="wrap" justify="space-around" alignItems="stretch" alignContent="stretch" id="container2">
             <Grid item md={4}>
@@ -89,14 +89,14 @@ function Home(props) {
               </Box>
             </Grid>
             <Grid item md={6}>
-              <Typography variant="body1">
+              <Typography variant="body1" component="span">
                 <Box paddingLeft="100px" paddingRight="100px"  textAlign="justify">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 </Box>
               </Typography>
             </Grid>
             <Grid item md={6}>
-              <Typography variant="body1">
+              <Typography variant="body1" component="span">
                 <Box paddingLeft="100px" paddingRight="100px" textAlign="justify">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 </Box>
@@ -113,7 +113,7 @@ function Home(props) {
               </Box>
             </Grid>
             <Grid item md={6}>
-              <Typography variant="body1">
+              <Typography variant="body1" component="span">
                 <Box paddingLeft="100px" paddingRight="100px"  textAlign="justify">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 </Box>
