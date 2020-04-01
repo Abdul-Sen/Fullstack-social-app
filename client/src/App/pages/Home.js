@@ -6,6 +6,7 @@ import ItemTile from '../components/shared/itemTile/itemTile';
 import GroupWorkIcon from '@material-ui/icons/GroupWork';
 import CodeIcon from '@material-ui/icons/Code';
 import PeopleIcon from '@material-ui/icons/People';
+import * as CONSTS from '../constants/constants';
 
 const useStyles = makeStyles(theme => ({
   root:{
@@ -22,7 +23,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       minHeight: "100vh",
       padding: "50px",
-      background: `url(${process.env.PUBLIC_URL + '/images/bg.jfif'}) no-repeat center fixed`,
+      background: `url(${CONSTS.BACKGROUND}) no-repeat center fixed`,
       backgroundSize: "100% auto",
       backdropFilter: "blur(3px)",
       padding: "20px 10% 20px 10%",
@@ -85,7 +86,7 @@ function Home(props) {
           <Grid container direction="row" wrap="wrap" justify="space-evenly" alignItems="stretch" alignContent="center" id="container3">
             <Grid item md={6}>
               <Box textAlign="right" marginBottom="70px">
-              <img src={process.env.PUBLIC_URL + '/images/handShake.jpg'} height="350px" ></img>
+              <img src={CONSTS.LANDING_ONE} height="350px" ></img>
               </Box>
             </Grid>
             <Grid item md={6}>
@@ -104,12 +105,12 @@ function Home(props) {
             </Grid>
             <Grid item md={6}>
               <Box textAlign="left" marginBottom="70px">
-              <img src={process.env.PUBLIC_URL + '/images/stockImg1.jpg'} height="350px" ></img>
+              <img src={CONSTS.LANDING_TWO} height="350px" ></img>
               </Box>
             </Grid>
             <Grid item md={6}>
               <Box textAlign="right" marginBottom="70px">
-              <img src={process.env.PUBLIC_URL + '/images/collab.jpg'} height="350px"></img>
+              <img src={CONSTS.LANDING_THREE} height="350px"></img>
               </Box>
             </Grid>
             <Grid item md={6}>
