@@ -1,0 +1,1 @@
+export const PORTFOLIO = 'http://abdul-sen.github.io/portfolio';
