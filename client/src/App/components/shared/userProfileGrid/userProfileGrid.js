@@ -37,17 +37,23 @@ function UserStateProfile() {
         handleUserDataArray(userData.docs);
     }, [userData]);
 
-    const fetchData = () => {
-        fetch((process.env.REACT_APP_PUBLIC_URL ? process.env.REACT_APP_PUBLIC_URL : "") + `api/getMockPage/?page=${Number(userData.page) + 1}`)
-            .then(function (response) {
-                return response.json();
-            })
-            .then((res) => {
-                handleUserData(res);
-            }).catch((err) => {
-                console.log("failed to register user");
-                console.log(err);
-            })
+    const fetchData = async ()=>{
+        let response = await fetch((process.env.REACT_APP_PUBLIC_URL ? process.env.REACT_APP_PUBLIC_URL : "") + `api/getMockPage/?page=${Number(userData.page) + 1}`,{
+            method: 'GET',
+            headers: {
+                "authorization": `Bearer ${sessionStorage.getItem('token')}`
+            }
+        });
+        
+        if(response.ok)
+        {
+            response = await response.json();
+            handleUserData(response);    
+        }
+        else{
+            console.log(`failed to load users`);
+            console.log(response.statusText);
+        }
     }
 
     const handleUserData = (newState) => {

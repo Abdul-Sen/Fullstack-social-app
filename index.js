@@ -90,7 +90,7 @@ app.post('/api/login',[
 // e.g http://localhost:5000/api/getMockPage/?page=20
 app.get('/api/getMockPage',[
 	query('page').isNumeric().withMessage("only numeric value allowed").isLength({min:1}).withMessage("you need to pass in a page number")	
-],(req,res)=>{
+],verifyToken,(req,res)=>{
 	let reg = /^\d+$/;
 	if(reg.test(req.query.page)) //! Temporary solution while i figure out why isNumeric is not behaving as expected
 	{
