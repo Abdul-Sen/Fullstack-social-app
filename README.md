@@ -7,7 +7,7 @@ Heres an overview of the project
 This is a work in-progress of a dev social site to connect with other developers both for social and
 work-related reasons
 
-#[Project Demo Link](https://sleepy-sierra-88885.herokuapp.com/)
+# [Project Demo Link](https://sleepy-sierra-88885.herokuapp.com/)
 
 ## Prerequisites
 In order to run this project node.js and npm both need to have been installed.
